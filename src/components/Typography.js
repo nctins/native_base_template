@@ -10,10 +10,10 @@ const typography = {
     textAlignVertical: "top",
   },
   buttonText: {
-    fontFamily: "Outfit-SemiBold",
-    fontWeight: "700",
-    fontSize: 22,
-    lineHeight: 28,
+    fontFamily: "Poppins-Regular",
+    fontWeight: "400",
+    fontSize: 23,
+    lineHeight: 35,
     textAlignVertical: "top",
   },
   smallText: {
