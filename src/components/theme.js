@@ -10,6 +10,7 @@ const color = {
   LightGreen: "rgba(77, 241, 50, 1)",
   LightGray: "rgba(124, 124, 122, 1)",
   Gray: "rgba(196, 196, 196, 1)",
+  GreenEdit: "rgba(34, 199, 169, 1)"
 };
 
 const shadows = {
@@ -64,6 +65,7 @@ export const theme = {
     },
     success: color.LightGreen,
     danger: color.LightRed,
+    edit: color.GreenEdit,
     warning: {
       1: color.Yellow,
       2: color.darkYellow,
