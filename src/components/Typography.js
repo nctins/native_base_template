@@ -61,12 +61,14 @@ const typography = {
   vocalTextE: {
     fontFamily: "Poppins-ExtraBold",
     fontSize: 28,
-    lineHeight: 72
+    lineHeight: 50,
+    textAlignVertical: "top"
   },
   vocalTextV: {
     fontFamily: "Poppins-Regular",
     fontSize: 20,
-    lineHeight: 50
+    lineHeight: 30,
+    textAlignVertical: "top"
   }
 };
 

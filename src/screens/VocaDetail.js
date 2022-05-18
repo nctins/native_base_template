@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Center,
@@ -14,34 +14,112 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Platform,
+  Pressable
 } from "react-native";
 import Typography from "../components/Typography";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 export const VocaDetail = () => {
+  const [liked, setLiked] = useState(false);
   return (
-    <Center flex={1} bg="primary.2">
-        <StatusBar />
+    <View style={{flex: 1}} bg="primary.2">
+      <View style={{flex: 0.5, backgroundColor: 'powderblue'}}>
+      </View>
+
+      <View style={{flex: 1}} >
         <VStack
           style={{ width: "100%", height: "100%" }}
           space={4}
           alignItems="center"
           justifyContent="center"
         >
-          <VStack space={2} justifyContent="center" alignItems="center" safeAreaTop mb={6}>
-            {["2xl"].map(size => 
-              <Image key={size} size={size} resizeMode="cover"
-              source={require("../../assets/images/table.jpg")}
-              alt={"Vocal image " + size} 
-            />)}
-          </VStack>
+          <Image
+            source={require("../../assets/images/table.jpg")}
+          />
+        </VStack>
+      </View>
 
-          <Typography variant="vocalTextE" color="text.dark">Table (n)</Typography>
-          <Typography variant="vocalTextV" color="text.dark">Cái bàn</Typography>
+      <View style={{flex: 0.5, flexDirection: 'column'}}>
+        <View style={{flex: 0.5,flexDirection: 'row'}} >
+          <View style={{flex: 0.5}} >
+            <VStack
+              style={{ width: "100%", height: "100%" }}
+              space={4}
+              paddingLeft="5"
+              justifyContent="center"
+            >
+              <Typography variant="vocalTextE" color="text.dark">Table (n)</Typography>
+            </VStack>
+          </View>
+
+          <View style={{flex: 0.5}} >
+            <VStack
+              style={{ width: "100%", height: "100%" }}
+              space={4}
+              paddingRight={5}
+              alignItems="flex-end"
+              justifyContent="center"
+            >
+              <Pressable onPress={() => setLiked((isLiked) => !isLiked)}>
+                <MaterialCommunityIcons
+                  name={liked ? "heart" : "heart-outline"}
+                  size={32}
+                  color={liked ? "red" : "black"}
+                />
+              </Pressable>
+            </VStack>
+          </View>
+        </View>
+
+        <View style={{flex: 0.5, flexDirection: 'row'}} >
+          <View style={{flex: 0.5}} >
+              <VStack
+                style={{ width: "100%", height: "100%" }}
+                space={4}
+                paddingLeft="5"
+                justifyContent="center"
+              >
+                <Typography variant="vocalTextV" color="text.dark">Cái bàn</Typography>
+              </VStack>
+            </View>
+          </View>
+        </View>
+
+      <View style={{
+        flex: 1.5,
+        margin: 20,
+        borderWidth: 4,
+        borderColor: '#E9B52F',
+        borderRadius: 10,
+      }}>
+        <VStack
+          style={{ width: "100%", height: "100%" }}
+          space={4}
+          alignItems="center"
+          justifyContent="center"
           
-          <Button.Group borderRadius="100" w="50%" h="5%" mt="12%">
+        >
+          <Typography variant="vocalTextV" color="text.dark">
+            Một bề mặt phẳng, thường được hỗ trợ bởi bốn chân, được sử dụng để đặt các vật
+          </Typography>
+        </VStack>
+      </View>
+
+      <View style={{
+        flex: 0.5
+      }}>
+        <VStack
+          style={{ width: "100%", height: "100%" }}
+          space={4}
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Button.Group borderRadius="10" w="50%" h="50%">
             <Button bgColor="edit" w="50%" h="100%">Chỉnh sửa</Button>
             <Button bgColor="danger" w="50%" h="100%">Xóa</Button>
-          </Button.Group>
+          </Button.Group> 
         </VStack>
-    </Center>
+      </View>
+
+    </View>
   );
 };
