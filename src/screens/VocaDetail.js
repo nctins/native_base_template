@@ -8,6 +8,7 @@ import {
   Image,
   HStack,
   Button,
+  IconButton,
 } from "native-base";
 import {
   KeyboardAvoidingView,
@@ -18,13 +19,46 @@ import {
 } from "react-native";
 import Typography from "../components/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 export const VocaDetail = () => {
   const [liked, setLiked] = useState(false);
   return (
     <View style={{flex: 1}} bg="primary.2">
-      <View style={{flex: 0.5, backgroundColor: 'powderblue'}}>
+      <View style={{flex: 0.5, flexDirection: 'row'}}>
+        <View style={{flex: 0.1}} >
+          
+        </View>
+        <View style={{flex: 0.3}} >
+          <VStack
+            style={{ width: "100%", height: "100%" }}
+            space={4}
+            alignItems="center"
+            justifyContent="flex-end"
+          >
+            <Icon name="chevron-left" size={20} color="rgba(102, 102, 102, 1)" />
+          </VStack>
+        </View>
+        <View style={{flex: 1.5}} >
+          
+        </View>
+        <View style={{flex: 0.3}} >
+          <VStack
+            style={{ width: "100%", height: "100%" }}
+            space={4}
+            alignItems="center"
+            justifyContent="flex-end"
+          >
+            <Icon name="navicon" size={20} color="rgba(102, 102, 102, 1)" />
+          </VStack>
+        </View>
+        <View style={{flex: 0.1}} >
+          
+        </View>
       </View>
-
+      <View style={{flex: 0.1}} >
+          
+      </View>
       <View style={{flex: 1}} >
         <VStack
           style={{ width: "100%", height: "100%" }}
@@ -95,10 +129,8 @@ export const VocaDetail = () => {
           style={{ width: "100%", height: "100%" }}
           space={4}
           alignItems="center"
-          justifyContent="center"
-          
         >
-          <Typography variant="vocalTextV" color="text.dark">
+          <Typography variant="vocalTextV" color="text.dark" padding="2">
             Một bề mặt phẳng, thường được hỗ trợ bởi bốn chân, được sử dụng để đặt các vật
           </Typography>
         </VStack>

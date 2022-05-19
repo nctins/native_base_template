@@ -61,7 +61,7 @@ export const theme = {
       dark: color.Black,
       light: color.White,
       gray: color.Gray,
-      lightGray: color.LightGray,
+      lightGray: color.LightGray
     },
     success: color.LightGreen,
     danger: color.LightRed,
@@ -69,7 +69,7 @@ export const theme = {
     warning: {
       1: color.Yellow,
       2: color.darkYellow,
-    },
+    }
   },
   shadows: shadows,
   config: {

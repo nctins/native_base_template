@@ -69,7 +69,13 @@ const typography = {
     fontSize: 20,
     lineHeight: 30,
     textAlignVertical: "top"
-  }
+  },
+  testStt: {
+    fontFamily: "Poppins-Regular",
+    fontSize: 18,
+    lineHeight: 20,
+    textAlignVertical: "top"
+  },
 };
 
 const Typography = (props)=>{
