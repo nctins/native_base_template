@@ -23,6 +23,13 @@ const typography = {
     lineHeight: 20,
     textAlignVertical: "top",
   },
+  mediumText:{
+    fontFamily: "Poppins-Regular",
+    fontWeight: "400",
+    fontSize: 16,
+    lineHeight: 23,
+    textAlignVertical: "top",
+  },
   title: {
     fontFamily: "Poppins-Bold",
     fontWeight: "700",
