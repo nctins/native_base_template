@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View, TextInput,Image, Switch ,TouchableWithoutFeedback,Keyboard,KeyboardAvoidingView } from 'react-native';
-import IconSetting from 'react-native-vector-icons/MaterialIcons';
-import IconMenu from 'react-native-vector-icons/Entypo';
+import IconSetting from '@expo/vector-icons/MaterialIcons';
+import IconMenu from '@expo/vector-icons/Entypo';
 import Typography from "../components/Typography";
 
 const SettingScreen = () => {
