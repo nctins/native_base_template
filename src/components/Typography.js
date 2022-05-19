@@ -65,6 +65,24 @@ const typography = {
     lineHeight: 72,
     textAlignVertical: "top",
   },
+  vocalTextE: {
+    fontFamily: "Poppins-ExtraBold",
+    fontSize: 28,
+    lineHeight: 50,
+    textAlignVertical: "top"
+  },
+  vocalTextV: {
+    fontFamily: "Poppins-Regular",
+    fontSize: 20,
+    lineHeight: 30,
+    textAlignVertical: "top"
+  },
+  testStt: {
+    fontFamily: "Poppins-Regular",
+    fontSize: 18,
+    lineHeight: 20,
+    textAlignVertical: "top"
+  },
 };
 
 const Typography = (props)=>{
