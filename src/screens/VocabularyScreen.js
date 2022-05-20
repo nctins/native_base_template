@@ -5,7 +5,7 @@ import IconA from 'react-native-vector-icons/FontAwesome';
 import Typography from "../components/Typography";
 import MeansOfVocabulary from "../components/MeansOfVocabulary";
 
-export const VocabularyScreen = () => {
+const VocabularyScreen = () => {
     const styles = {
         default : {
             flex: 1,
@@ -101,4 +101,5 @@ export const VocabularyScreen = () => {
     </View>
     </TouchableWithoutFeedback>
   );
-};
+}
+export default VocabularyScreen

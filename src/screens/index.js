@@ -1,11 +1,12 @@
 import React from "react";
-import { LoginScreen } from "./LoginScreen";
-import SettingScreen from "./SettingScreen";
-import { VocabularyScreen } from "./VocabularyScreen";
-
+import { NavigationContainer } from '@react-navigation/native';
+import SlideBar from "./SlideBar";
 
 export const RootComponent = function(){
     return (
-        <SettingScreen />
+        <NavigationContainer>
+            <SlideBar />
+        </NavigationContainer>
+        
     )
 }

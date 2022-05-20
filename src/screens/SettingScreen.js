@@ -1,29 +1,16 @@
 import React, {useState} from 'react';
-import {View, TextInput,Image, Switch ,TouchableWithoutFeedback,Keyboard,KeyboardAvoidingView } from 'react-native';
+import {View,ScrollView, TextInput,Image, Switch ,TouchableWithoutFeedback,Keyboard,KeyboardAvoidingView } from 'react-native';
 import IconSetting from 'react-native-vector-icons/MaterialIcons';
 import IconMenu from 'react-native-vector-icons/Entypo';
 import Typography from "../components/Typography";
 
-const SettingScreen = () => {
+const SettingScreen = ({navigation}) => {
     const [isAlertEnabled,setIsAlertEnabled] = useState(true);
     const toggleSwitch = () => setIsAlertEnabled(previousState => !previousState);
 
     const styles = {
-        default : {
-            flex: 1,
-            backgroundColor: "#32A1B9"
-        },
-        headerView: {
-            flex: 2,
-            backgroundColor: "#32A1B9",
-            paddingHorizontal: 20,
-            paddingTop:30,
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems:"center"
-        },
         mainView: {
-            flex: 10,
+            flex: 1,
             backgroundColor: "#DBD9D4",
             paddingBottom: 80
         },
@@ -56,22 +43,42 @@ const SettingScreen = () => {
         }
     }
 
-    return (
-        <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
-            style={{flex: 1, width: "100%"}}
-        >
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.default}>
-            <View style={styles.headerView}>
-                <IconMenu name='menu' size={40} style={{color:"white"}}/>
-                <View style={{flexDirection:"row",justifyContent:"center",alignItems:"center"}}>
-                    <Typography variant="title" style={{color:"white"}}> Cài đặt </Typography>
-                    <IconSetting name='settings' size={40} style={{color:"white"}}></IconSetting>
-                </View>
+    const headerRight = () => {
+        return (
+            <View style={{flexDirection:"row",justifyContent:"center",alignItems:"center", marginRight:15}}>
+                <Typography variant="title" style={{color:"white"}}> Cài đặt </Typography>
+                <IconSetting name='settings' size={40} style={{color:"white"}}></IconSetting>
             </View>
+        )
+    }
+
+    React.useLayoutEffect(() => {
+        navigation.setOptions({
+          headerLeft: () => (
+            <IconMenu 
+                name='menu' 
+                size={40}
+                color='white'
+                style={{marginLeft:20}}
+                onPress = {() => {
+                    navigation.openDrawer();
+                }}
+            />
+          ),
+          headerRight: headerRight,
+          headerTitle: "",
+          headerStyle: {
+            backgroundColor: "#32A1B9",
+            height:150
+        },
+        });
+      }, [navigation]);
+
+    return (
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.mainView}>
-                <View style={{flex:2, paddingTop:15}}>
+                <ScrollView>
+                <View style={{height:150, paddingTop:15,backgroundColor:"red"}}>
                     <Typography variant="smallTitle" style={{color:"black",marginLeft:15}}>Tài khoản</Typography>
                     <View style={[styles.componentMainView,{minHeight:60, paddingHorizontal:15,alignItems:"center",flexDirection:"row"}]}>
                         <Image style={styles.tinyLogo} source={{url:"https://reactnative.dev/img/tiny_logo.png"}}></Image>
@@ -81,7 +88,7 @@ const SettingScreen = () => {
                         </View>
                     </View>
                 </View>
-                <View style={{flex:2, paddingTop:15}}>
+                <View style={{height:120, paddingTop:15,backgroundColor:"blue"}}>
                     <Typography variant="smallTitle" style={{color:"black",marginLeft:15}}>Thông báo</Typography>
                     <View style={[styles.componentMainView]}>
                         <View style={[styles.lineStyle,{borderBottomWidth:1,borderColor:"#DBD9D4"}]}>
@@ -101,7 +108,7 @@ const SettingScreen = () => {
                         </View>
                     </View>
                 </View>
-                <View style={{flex:2, paddingTop:15}}>
+                <View style={{height:"30%", paddingTop:15}}>
                     <Typography variant="smallTitle" style={{color:"black",marginLeft:15}}>Cộng đồng</Typography>
                     <View style={[styles.componentMainView]}>
                         <View style={[styles.lineStyle,{borderBottomWidth:1,borderColor:"#DBD9D4"}]}>
@@ -112,7 +119,7 @@ const SettingScreen = () => {
                         </View>
                     </View>
                 </View>
-                <View style={{flex:3, paddingTop:15}}>
+                <View style={{height:"30%", paddingTop:15}}>
                     <Typography variant="smallTitle" style={{color:"black",marginLeft:15}}>Thông tin</Typography>
                     <View style={[styles.componentMainView]}>
                         <View style={[styles.lineStyle,{borderBottomWidth:1,borderColor:"#DBD9D4"}]}>
@@ -127,10 +134,9 @@ const SettingScreen = () => {
                         </View>
                     </View>
                 </View>
+                </ScrollView>
             </View>
-        </View>
         </TouchableWithoutFeedback>
-        </KeyboardAvoidingView>
     )
 }
 export default SettingScreen
