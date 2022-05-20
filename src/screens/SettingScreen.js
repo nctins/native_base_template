@@ -11,8 +11,7 @@ const SettingScreen = ({navigation}) => {
     const styles = {
         mainView: {
             flex: 1,
-            backgroundColor: "#DBD9D4",
-            paddingBottom: 80
+            backgroundColor: "#DBD9D4"
         },
         componentMainView:{
             flex:1,
@@ -36,7 +35,7 @@ const SettingScreen = ({navigation}) => {
             width:60,
             backgroundColor: "#CCCCCC",
             borderRadius: 5,
-            paddingHorizontal:20,
+            paddingHorizontal:10,
             justifyContent: "center",
             alignItems: "center",
             color: "black"
@@ -69,7 +68,7 @@ const SettingScreen = ({navigation}) => {
           headerTitle: "",
           headerStyle: {
             backgroundColor: "#32A1B9",
-            height:150
+            height:170
         },
         });
       }, [navigation]);
@@ -77,8 +76,8 @@ const SettingScreen = ({navigation}) => {
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.mainView}>
-                <ScrollView>
-                <View style={{height:150, paddingTop:15,backgroundColor:"red"}}>
+                <ScrollView contentContainerStyle={{flexGrow:1}}>
+                <View style={{height:160, paddingTop:15}}>
                     <Typography variant="smallTitle" style={{color:"black",marginLeft:15}}>Tài khoản</Typography>
                     <View style={[styles.componentMainView,{minHeight:60, paddingHorizontal:15,alignItems:"center",flexDirection:"row"}]}>
                         <Image style={styles.tinyLogo} source={{url:"https://reactnative.dev/img/tiny_logo.png"}}></Image>
@@ -88,7 +87,7 @@ const SettingScreen = ({navigation}) => {
                         </View>
                     </View>
                 </View>
-                <View style={{height:120, paddingTop:15,backgroundColor:"blue"}}>
+                <View style={{height:130, paddingTop:15}}>
                     <Typography variant="smallTitle" style={{color:"black",marginLeft:15}}>Thông báo</Typography>
                     <View style={[styles.componentMainView]}>
                         <View style={[styles.lineStyle,{borderBottomWidth:1,borderColor:"#DBD9D4"}]}>
@@ -102,13 +101,13 @@ const SettingScreen = ({navigation}) => {
                         <View style={[styles.lineStyle,{}]}>
                             <Typography variant="mediumText" style={{color:"black"}}>Thời gian gợi nhớ từ vựng</Typography>
                             <View style={{flexDirection:"row",alignItems:"center"}}>
-                                <TextInput numberOfLines={1} defaultValue="15" style={styles.textInput}></TextInput>
+                                <TextInput keyboardType='numeric' numberOfLines={1} defaultValue="15" style={styles.textInput}></TextInput>
                                 <Typography variant="mediumText" style={{color:"black", marginLeft: 15}}>Minus</Typography>
                             </View>
                         </View>
                     </View>
                 </View>
-                <View style={{height:"30%", paddingTop:15}}>
+                <View style={{height:130, paddingTop:15}}>
                     <Typography variant="smallTitle" style={{color:"black",marginLeft:15}}>Cộng đồng</Typography>
                     <View style={[styles.componentMainView]}>
                         <View style={[styles.lineStyle,{borderBottomWidth:1,borderColor:"#DBD9D4"}]}>
@@ -119,7 +118,7 @@ const SettingScreen = ({navigation}) => {
                         </View>
                     </View>
                 </View>
-                <View style={{height:"30%", paddingTop:15}}>
+                <View style={{height:195, paddingTop:15}}>
                     <Typography variant="smallTitle" style={{color:"black",marginLeft:15}}>Thông tin</Typography>
                     <View style={[styles.componentMainView]}>
                         <View style={[styles.lineStyle,{borderBottomWidth:1,borderColor:"#DBD9D4"}]}>

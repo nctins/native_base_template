@@ -1,7 +1,7 @@
 import React from "react";
 import {View, TextInput,Pressable ,TouchableWithoutFeedback,Keyboard } from 'react-native';
-import Icon from 'react-native-vector-icons/AntDesign';
-import IconA from 'react-native-vector-icons/FontAwesome';
+import Icon from '@expo/vector-icons/AntDesign';
+import IconA from '@expo/vector-icons/FontAwesome';
 import Typography from "../components/Typography";
 import MeansOfVocabulary from "../components/MeansOfVocabulary";
 
@@ -71,8 +71,8 @@ const VocabularyScreen = () => {
                     <Icon name="pluscircle" size={30} style={{marginRight:10}}></Icon>
                 </View>
                 <View style={{width:"100%", paddingHorizontal:20,paddingBottom:10, zIndex:1}}>
-                    <MeansOfVocabulary zIndex = {3} />
-                    <MeansOfVocabulary zIndex = {2} />
+                    <MeansOfVocabulary />
+                    <MeansOfVocabulary />
                 </View>
             </View>
             <View style={[styles.componentViewLeft,{marginTop:15}]}>
@@ -101,5 +101,5 @@ const VocabularyScreen = () => {
     </View>
     </TouchableWithoutFeedback>
   );
-}
+};
 export default VocabularyScreen

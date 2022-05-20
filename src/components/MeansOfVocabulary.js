@@ -1,8 +1,8 @@
-import {View, TextInput ,TouchableWithoutFeedback } from 'react-native';
-import DropDownComponent from './DropDown';
+import {View, TextInput } from 'react-native';
 import React from "react";
+import SelectComponent from './Select';
 
-const MeansOfVocabulary = (props) =>{
+const MeansOfVocabulary = () =>{
 
     const styles = {
         TextInputConfig:{
@@ -10,12 +10,13 @@ const MeansOfVocabulary = (props) =>{
             marginLeft:10,
             borderRadius:5,
             paddingHorizontal:10,
-            paddingVertical:10
+            paddingVertical:2,
+            height: 40
         }
     }
     return ( 
-        <View style={{width:"100%",flexDirection:"row",marginTop:10,zIndex:props.zIndex}}>
-            <DropDownComponent containerStyle = {{width:"40%"}} style = {{zIndex: props.zIndex}}/>
+        <View style={{width:"100%",flexDirection:"row",marginTop:10,alignItems:'center'}}>
+            <SelectComponent />
             <TextInput numberOfLines={1} style={[styles.TextInputConfig,{width:"50%"}]}></TextInput>
         </View>
      );
