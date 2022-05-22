@@ -1,31 +1,17 @@
 import React, {useState} from 'react';
-import {View, TextInput,Image, Switch ,TouchableWithoutFeedback,Keyboard,KeyboardAvoidingView } from 'react-native';
-import IconSetting from '@expo/vector-icons/MaterialIcons';
-import IconMenu from '@expo/vector-icons/Entypo';
+import {View,ScrollView, TextInput,Image, Switch ,TouchableWithoutFeedback,Keyboard,KeyboardAvoidingView } from 'react-native';
+import IconSetting from 'react-native-vector-icons/MaterialIcons';
+import IconMenu from 'react-native-vector-icons/Entypo';
 import Typography from "../components/Typography";
 
-const SettingScreen = () => {
+const SettingScreen = ({navigation}) => {
     const [isAlertEnabled,setIsAlertEnabled] = useState(true);
     const toggleSwitch = () => setIsAlertEnabled(previousState => !previousState);
 
     const styles = {
-        default : {
-            flex: 1,
-            backgroundColor: "#32A1B9"
-        },
-        headerView: {
-            flex: 2,
-            backgroundColor: "#32A1B9",
-            paddingHorizontal: 20,
-            paddingTop:30,
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems:"center"
-        },
         mainView: {
-            flex: 10,
-            backgroundColor: "#DBD9D4",
-            paddingBottom: 80
+            flex: 1,
+            backgroundColor: "#DBD9D4"
         },
         componentMainView:{
             flex:1,
@@ -49,29 +35,49 @@ const SettingScreen = () => {
             width:60,
             backgroundColor: "#CCCCCC",
             borderRadius: 5,
-            paddingHorizontal:20,
+            paddingHorizontal:10,
             justifyContent: "center",
             alignItems: "center",
             color: "black"
         }
     }
 
-    return (
-        <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
-            style={{flex: 1, width: "100%"}}
-        >
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.default}>
-            <View style={styles.headerView}>
-                <IconMenu name='menu' size={40} style={{color:"white"}}/>
-                <View style={{flexDirection:"row",justifyContent:"center",alignItems:"center"}}>
-                    <Typography variant="title" style={{color:"white"}}> Cài đặt </Typography>
-                    <IconSetting name='settings' size={40} style={{color:"white"}}></IconSetting>
-                </View>
+    const headerRight = () => {
+        return (
+            <View style={{flexDirection:"row",justifyContent:"center",alignItems:"center", marginRight:15}}>
+                <Typography variant="title" style={{color:"white"}}> Cài đặt </Typography>
+                <IconSetting name='settings' size={40} style={{color:"white"}}></IconSetting>
             </View>
+        )
+    }
+
+    React.useLayoutEffect(() => {
+        navigation.setOptions({
+          headerLeft: () => (
+            <IconMenu 
+                name='menu' 
+                size={40}
+                color='white'
+                style={{marginLeft:20}}
+                onPress = {() => {
+                    navigation.openDrawer();
+                }}
+            />
+          ),
+          headerRight: headerRight,
+          headerTitle: "",
+          headerStyle: {
+            backgroundColor: "#32A1B9",
+            height:170
+        },
+        });
+      }, [navigation]);
+
+    return (
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.mainView}>
-                <View style={{flex:2, paddingTop:15}}>
+                <ScrollView contentContainerStyle={{flexGrow:1}}>
+                <View style={{height:160, paddingTop:15}}>
                     <Typography variant="smallTitle" style={{color:"black",marginLeft:15}}>Tài khoản</Typography>
                     <View style={[styles.componentMainView,{minHeight:60, paddingHorizontal:15,alignItems:"center",flexDirection:"row"}]}>
                         <Image style={styles.tinyLogo} source={{url:"https://reactnative.dev/img/tiny_logo.png"}}></Image>
@@ -81,7 +87,7 @@ const SettingScreen = () => {
                         </View>
                     </View>
                 </View>
-                <View style={{flex:2, paddingTop:15}}>
+                <View style={{height:130, paddingTop:15}}>
                     <Typography variant="smallTitle" style={{color:"black",marginLeft:15}}>Thông báo</Typography>
                     <View style={[styles.componentMainView]}>
                         <View style={[styles.lineStyle,{borderBottomWidth:1,borderColor:"#DBD9D4"}]}>
@@ -95,13 +101,13 @@ const SettingScreen = () => {
                         <View style={[styles.lineStyle,{}]}>
                             <Typography variant="mediumText" style={{color:"black"}}>Thời gian gợi nhớ từ vựng</Typography>
                             <View style={{flexDirection:"row",alignItems:"center"}}>
-                                <TextInput numberOfLines={1} defaultValue="15" style={styles.textInput}></TextInput>
+                                <TextInput keyboardType='numeric' numberOfLines={1} defaultValue="15" style={styles.textInput}></TextInput>
                                 <Typography variant="mediumText" style={{color:"black", marginLeft: 15}}>Minus</Typography>
                             </View>
                         </View>
                     </View>
                 </View>
-                <View style={{flex:2, paddingTop:15}}>
+                <View style={{height:130, paddingTop:15}}>
                     <Typography variant="smallTitle" style={{color:"black",marginLeft:15}}>Cộng đồng</Typography>
                     <View style={[styles.componentMainView]}>
                         <View style={[styles.lineStyle,{borderBottomWidth:1,borderColor:"#DBD9D4"}]}>
@@ -112,7 +118,7 @@ const SettingScreen = () => {
                         </View>
                     </View>
                 </View>
-                <View style={{flex:3, paddingTop:15}}>
+                <View style={{height:195, paddingTop:15}}>
                     <Typography variant="smallTitle" style={{color:"black",marginLeft:15}}>Thông tin</Typography>
                     <View style={[styles.componentMainView]}>
                         <View style={[styles.lineStyle,{borderBottomWidth:1,borderColor:"#DBD9D4"}]}>
@@ -127,10 +133,9 @@ const SettingScreen = () => {
                         </View>
                     </View>
                 </View>
+                </ScrollView>
             </View>
-        </View>
         </TouchableWithoutFeedback>
-        </KeyboardAvoidingView>
     )
 }
 export default SettingScreen
