@@ -9,7 +9,7 @@ import { theme as myTheme } from "./src/components/theme.js";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import {font} from "./assets/fonts/index.js"
-
+import {HomePage} from './src/screens/HomePage.js'
 // extend the theme
 export const theme = extendTheme(myTheme);
 
@@ -21,7 +21,7 @@ export default function App() {
 
   return (
     <NativeBaseProvider theme={theme}>
-      <RootComponent/>
+      <HomePage/>
     </NativeBaseProvider>
   );
 }

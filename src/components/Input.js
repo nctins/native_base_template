@@ -54,3 +54,24 @@ export const PasswordInput = (props) => {
     />
   );
 };
+
+export const SearchbarInput = (props) => {
+  const { icon, ...otherProps } = props;
+  return (
+    <DefaultInput
+      variant="filled"
+      autoFocus={false}
+      borderRadius="15"
+      bg={"primary.5"}
+      InputRightElement={
+        <Icon
+          as={<MaterialIcons name={icon} />}
+          size={6}
+          mr="2"
+          color={"white"}
+        />
+      }
+      {...otherProps}
+      />
+  );
+};
