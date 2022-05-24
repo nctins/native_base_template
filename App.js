@@ -3,7 +3,6 @@ import {
   NativeBaseProvider,
   extendTheme,
 } from "native-base";
-import { Platform } from "react-native";
 import { RootComponent }from "./src/screens/index.js";
 import { theme as myTheme } from "./src/components/theme.js";
 import { useFonts } from "expo-font";
@@ -21,7 +20,9 @@ export default function App() {
 
   return (
     <NativeBaseProvider theme={theme}>
-      <RootComponent/>
+      <RootComponent />
     </NativeBaseProvider>
   );
 }
+
+// AppRegistry.registerComponent('App', () => App);

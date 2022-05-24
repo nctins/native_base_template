@@ -5,11 +5,13 @@ const color = {
   Yellow: "rgba(233, 181, 47, 1)",
   darkYellow: "rgba(133, 122, 94, 1)",
   White: "rgba(255, 255, 255, 1)",
+  White_2:"rgba(255, 255, 255, 0.5)",
   Black: "rgba(57, 57, 57, 1)",
   LightRed: "rgba(247, 56, 89, 1)",
   LightGreen: "rgba(77, 241, 50, 1)",
   LightGray: "rgba(124, 124, 122, 1)",
   Gray: "rgba(196, 196, 196, 1)",
+  GreenEdit: "rgba(34, 199, 169, 1)"
 };
 
 const shadows = {
@@ -50,6 +52,7 @@ export const theme = {
       2: color.LightBlue,
       3: color.LightBlue2,
       4: color.White,
+      5:color.White_2
     },
     secondary: {
       1: color.Gray,
@@ -60,14 +63,15 @@ export const theme = {
       dark: color.Black,
       light: color.White,
       gray: color.Gray,
-      lightGray: color.LightGray,
+      lightGray: color.LightGray
     },
     success: color.LightGreen,
     danger: color.LightRed,
+    edit: color.GreenEdit,
     warning: {
       1: color.Yellow,
       2: color.darkYellow,
-    },
+    }
   },
   shadows: shadows,
   config: {

@@ -1,7 +1,9 @@
 import React from "react";
 import {
+  View,
   Center,
   StatusBar,
+  Text,
   VStack,
   Image,
   HStack,
@@ -16,7 +18,7 @@ import {
 import Typography from "../components/Typography";
 import { Input, PasswordInput } from "../components/Input";
 
-const LoginScreen = ({navigation}) => {
+const SignUpScreen = ({navigation}) => {
   return (
     <Center flex={1} bg="primary.1">
       <StatusBar />
@@ -32,32 +34,29 @@ const LoginScreen = ({navigation}) => {
             justifyContent="center"
           >
             <Image
-              source={require("../../assets/Illustrations/login.png")}
-              alt="Login Illustration"
-              width={184.15}
-              height={286.71}
+              source={require("../../assets/Illustrations/register.png")}
+              alt="Register Illustration"
+              width={386}
+              height={255}
             />
-            <Typography variant="title">Đăng Nhập</Typography>
             <VStack space={4} w="77%">
               <Input
                 icon="email"
-                placeholder="Tài khoản, Email"
+                placeholder="Email"
+                color={"text.dark"}
+                bg={"white"}
+              />
+              <Input
+                icon="email"
+                placeholder="Tài khoản"
                 color={"text.dark"}
                 bg={"white"}
               />
               <PasswordInput placeholder="Mật khẩu" />
-              <HStack style={{ width: "100%"}}>
-                <Typography variant="smallText" onPress={() => navigation.navigate('SignUpScreen')}>Đăng ký</Typography>
-                <Typography
-                  variant="smallText"
-                  color={"text.dark"}
-                  style={{ position: 'absolute', right: 0 }}
-                >
-                  Quên mật khẩu?
+              <Button bgColor={"warning.1"} borderRadius="30" shadow={2} onPress={() => navigation.navigate('LoginScreen')}>
+                <Typography variant="buttonText" color="text.light">
+                  Đăng ký
                 </Typography>
-              </HStack>
-              <Button bgColor={"warning.1"} borderRadius="30" shadow={2} onPress={() => navigation.navigate('DrawerNavigation')}>
-                <Typography variant="buttonText" color="text.light">Đăng nhập</Typography>
               </Button>
             </VStack>
           </VStack>
@@ -66,4 +65,4 @@ const LoginScreen = ({navigation}) => {
     </Center>
   );
 }
-export default LoginScreen;
+export default SignUpScreen;

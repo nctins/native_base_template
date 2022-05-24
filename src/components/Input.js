@@ -9,10 +9,12 @@ export const Input = (props) => {
       variant="filled"
       bg={"white"}
       autoFocus={false}
+      borderRadius="15"
+      shadow={1}
       InputLeftElement={
         <Icon
           as={<MaterialIcons name={icon} />}
-          size={5}
+          size={6}
           ml="2"
           color="warning.1"
         />
@@ -28,10 +30,12 @@ export const PasswordInput = (props) => {
     <DefaultInput
       variant="filled"
       bg={"white"}
+      borderRadius="15"
+      shadow={1}
       InputLeftElement={
         <Icon
           as={<Fontisto name="locked" />}
-          size={5}
+          size={6}
           ml="2"
           color="warning.1"
         />
@@ -40,7 +44,7 @@ export const PasswordInput = (props) => {
       InputRightElement={
         <Icon
           as={<MaterialIcons name={show ? "visibility" : "visibility-off"} />}
-          size={5}
+          size={6}
           mr="2"
           color="warning.1"
           onPress={() => setShow(!show)}
@@ -48,5 +52,26 @@ export const PasswordInput = (props) => {
       }
       {...props}
     />
+  );
+};
+
+export const SearchbarInput = (props) => {
+  const { icon, ...otherProps } = props;
+  return (
+    <DefaultInput
+      variant="filled"
+      autoFocus={false}
+      borderRadius="15"
+      bg={"primary.5"}
+      InputRightElement={
+        <Icon
+          as={<MaterialIcons name={icon} />}
+          size={6}
+          mr="2"
+          color={"white"}
+        />
+      }
+      {...otherProps}
+      />
   );
 };

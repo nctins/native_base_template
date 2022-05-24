@@ -10,10 +10,10 @@ const typography = {
     textAlignVertical: "top",
   },
   buttonText: {
-    fontFamily: "Outfit-SemiBold",
-    fontWeight: "700",
-    fontSize: 22,
-    lineHeight: 28,
+    fontFamily: "Poppins-Regular",
+    fontWeight: "400",
+    fontSize: 23,
+    lineHeight: 35,
     textAlignVertical: "top",
   },
   smallText: {
@@ -64,6 +64,24 @@ const typography = {
     fontSize: 48,
     lineHeight: 72,
     textAlignVertical: "top",
+  },
+  vocalTextE: {
+    fontFamily: "Poppins-ExtraBold",
+    fontSize: 28,
+    lineHeight: 50,
+    textAlignVertical: "top"
+  },
+  vocalTextV: {
+    fontFamily: "Poppins-Regular",
+    fontSize: 20,
+    lineHeight: 30,
+    textAlignVertical: "top"
+  },
+  testStt: {
+    fontFamily: "Poppins-Regular",
+    fontSize: 18,
+    lineHeight: 20,
+    textAlignVertical: "top"
   },
 };
 
