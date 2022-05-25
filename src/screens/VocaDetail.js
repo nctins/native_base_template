@@ -21,7 +21,7 @@ import Typography from "../components/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-export const VocaDetail = () => {
+const VocaDetail = ({navigation}) => {
   const [liked, setLiked] = useState(false);
   return (
     <View style={{flex: 1}} bg="primary.2">
@@ -36,7 +36,7 @@ export const VocaDetail = () => {
             alignItems="center"
             justifyContent="flex-end"
           >
-            <Icon name="chevron-left" size={20} color="rgba(102, 102, 102, 1)" />
+            <Icon name="chevron-left" size={20} color="rgba(102, 102, 102, 1)" onPress={() => navigation.goBack()}/>
           </VStack>
         </View>
         <View style={{flex: 1.5}} >
@@ -49,7 +49,6 @@ export const VocaDetail = () => {
             alignItems="center"
             justifyContent="flex-end"
           >
-            <Icon name="navicon" size={20} color="rgba(102, 102, 102, 1)" />
           </VStack>
         </View>
         <View style={{flex: 0.1}} >
@@ -66,9 +65,13 @@ export const VocaDetail = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <Image
-            source={require("../../assets/images/table.jpg")}
-          />
+        <Image 
+          source={{
+              uri: "https://wallpaperaccess.com/full/317501.jpg"
+          }} 
+          size="40"
+          alt="default image"
+        />
         </VStack>
       </View>
 
@@ -154,4 +157,5 @@ export const VocaDetail = () => {
 
     </View>
   );
-};
+}
+export default VocaDetail;

@@ -6,7 +6,6 @@ import {
     Icon,
     HStack,
     Button,
-    IconButton,
     Box,
     FormControl,
     Modal
@@ -26,18 +25,18 @@ import TopicComponent from "../components/TopicComponent";
 import WordComponent from "../components/WordComponent";
 
 const HomePage = ({navigation}) => {
-    const [listTopic,setListTopic] = useState([]);
+    const [listTopic,setListTopic] = useState([{id:uuid.v4(),name:"test 1",listWord:[{id:uuid.v4(),name:"computer",type:"n","means":"máy tính",description:"abcasdavacacacaca",isFavorite:true},{id:uuid.v4(),name:"hard",type:"adj","means":"chăm chỉ",description:"abcasdavacacacaca",isFavorite:false}],isAlert:true}]);
     const [isViewTotal,setIsViewTotal] = useState(true);
     const [indexTopic,setIndexTopic] = useState(null);
 
     const styles = {
         TopicTitle: {
-            paddingHorizontal:5,
+            paddingHorizontal:10,
             paddingVertical:2
         }
     }
 
-    const headerRight = () => {
+    const configHeaderRight = () => {
         return (
             <View style={{flexDirection:"row",justifyContent:"center",alignItems:"center", marginRight:15}}>
                 <Typography variant="title" style={{color:"white",fontSize:25}}> Trang chủ </Typography>
@@ -60,7 +59,7 @@ const HomePage = ({navigation}) => {
             />
             ),
             headerTitle: "",
-            headerRight: headerRight,
+            headerRight: configHeaderRight,
             headerStyle: {
                 backgroundColor: "#32A1B9",
                 height:70,
@@ -81,6 +80,10 @@ const HomePage = ({navigation}) => {
     const onPressTopicTitle = (id) => {
         setIsViewTotal(false);
         setIndexTopic(id);
+    }
+
+    const onPressAddVocabularyButton = () =>{
+        navigation.navigate("AddVocabularyScreen");
     }
 
 	return (
@@ -116,14 +119,14 @@ const HomePage = ({navigation}) => {
                                     : <View style={{width:"100%",flexDirection:"row",justifyContent:"space-between"}}>
                                         <Button variant="ghost"
                                             _text={{color:"#E9B52F",fontSize:"xl",fontWeight:'bold'}}
-                                            onPress={() => console.log("Thêm từ vựng")}
+                                            onPress={onPressAddVocabularyButton}
                                             leftIcon={<Icon as={MaterialIcons} name="add-circle" size="lg" color={"warning.1"}/>}  
                                         >
                                             Thêm Từ vựng
                                         </Button>     
                                         <Button variant="ghost"
                                             _text={{color:"#E9B52F",fontSize:"xl",fontWeight:'bold'}}
-                                            onPress={() => console.log("luyện tập")}
+                                            onPress={() => navigation.navigate("Practice")}
                                             leftIcon={<Icon as={MaterialIcons} name="add-circle" size="lg" color={"warning.1"}/>}  
                                         >
                                             Luyện tập
@@ -134,7 +137,7 @@ const HomePage = ({navigation}) => {
                         <View pb={4} width="90%" showsVerticalScrollIndicator={false}>
                             {
                                 isViewTotal ? listTopic.length > 0 ? listTopic.map((topic,index) =><TopicComponent key={index} topic={topic} setListTopic = {setListTopic} OnPressTopic={OnPressTopic}/>) : null
-                                            : listTopic.length > 0 ? listTopic.map((topic,index) => indexTopic === topic.id ? topic.listWord.length > 0 ? <WordComponent key={index} listWord={topic.listWord} /> : null : null) : null
+                                            : listTopic.length > 0 ? listTopic.map(topic => indexTopic === topic.id ? topic.listWord.length > 0 ? topic.listWord.map((word,index) => <WordComponent key={index} word={word} setListTopic={setListTopic} topicId={topic.id} navigation={navigation}/>) : null : null) : null
                             }
                         </View>
 					</Box>   
