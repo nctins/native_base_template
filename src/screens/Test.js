@@ -7,8 +7,7 @@ import {
     Image,
     HStack,
     Button,
-    IconButton,
-    Checkbox
+    IconButton
 } from "native-base";
 import {
     KeyboardAvoidingView,
@@ -23,7 +22,7 @@ import Typography from "../components/Typography";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { CheckBox } from "react-native-elements/dist/checkbox/CheckBox";
 
-export const Test = () => {
+const Test = ({navigation}) => {
     state={
         selectedLang:0
     };
@@ -39,7 +38,7 @@ export const Test = () => {
                         alignItems="center"
                         justifyContent="flex-end"
                     >
-                        <Icon name="chevron-left" size={20} color="rgba(102, 102, 102, 1)" />
+                        <Icon name="chevron-left" size={20} color="rgba(102, 102, 102, 1)" onPress={() => navigation.goBack()}/>
                     </VStack>
                 </View>
 
@@ -61,7 +60,6 @@ export const Test = () => {
                         alignItems="center"
                         justifyContent="flex-end"
                     >
-                        <Icon name="navicon" size={20} color="rgba(102, 102, 102, 1)" />
                     </VStack>
                 </View>
                 
@@ -86,9 +84,13 @@ export const Test = () => {
                     alignItems="center"
                     justifyContent="center"
                 >
-                    <Image
-                        source={require("../../assets/images/table.jpg")}
-                    />
+                <Image 
+                    source={{
+                        uri: "https://wallpaperaccess.com/full/317501.jpg"
+                    }} 
+                    size="48"
+                    alt="default image"
+                />
                 </VStack>
             </View>
 
@@ -118,7 +120,8 @@ export const Test = () => {
             </View> */}
         </View>
     );
-};
+}
+export default Test;
 
 // const styles = StyleSheet.create({
 //     container: {

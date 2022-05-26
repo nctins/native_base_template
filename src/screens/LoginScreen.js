@@ -1,9 +1,7 @@
 import React from "react";
 import {
-  View,
   Center,
   StatusBar,
-  Text,
   VStack,
   Image,
   HStack,
@@ -18,7 +16,7 @@ import {
 import Typography from "../components/Typography";
 import { Input, PasswordInput } from "../components/Input";
 
-export const LoginScreen = () => {
+const LoginScreen = ({navigation}) => {
   return (
     <Center flex={1} bg="primary.1">
       <StatusBar />
@@ -49,7 +47,7 @@ export const LoginScreen = () => {
               />
               <PasswordInput placeholder="Mật khẩu" />
               <HStack style={{ width: "100%"}}>
-                <Typography variant="smallText">Đăng ký</Typography>
+                <Typography variant="smallText" onPress={() => navigation.navigate('SignUpScreen')}>Đăng ký</Typography>
                 <Typography
                   variant="smallText"
                   color={"text.dark"}
@@ -58,7 +56,7 @@ export const LoginScreen = () => {
                   Quên mật khẩu?
                 </Typography>
               </HStack>
-              <Button bgColor={"warning.1"} borderRadius="30" shadow={2} >
+              <Button bgColor={"warning.1"} borderRadius="30" shadow={2} onPress={() => navigation.navigate('DrawerNavigation')}>
                 <Typography variant="buttonText" color="text.light">Đăng nhập</Typography>
               </Button>
             </VStack>
@@ -67,4 +65,5 @@ export const LoginScreen = () => {
       </KeyboardAvoidingView>
     </Center>
   );
-};
+}
+export default LoginScreen;

@@ -1,5 +1,5 @@
 import React,{ useState } from "react";
-import {View,Text, TextInput,Pressable ,TouchableWithoutFeedback,Keyboard } from 'react-native';
+import {View,ScrollView, Text, TextInput,Pressable ,TouchableWithoutFeedback,Keyboard } from 'react-native';
 import Icon from '@expo/vector-icons/AntDesign';
 import * as ImagePicker from 'expo-image-picker';
 import IconAwesome from '@expo/vector-icons/FontAwesome';
@@ -12,7 +12,7 @@ const styles = {
         backgroundColor: "#EDF3ED"
     },
     mainView: {
-        paddingTop: 60,
+        paddingTop: 30,
         paddingHorizontal: 15
     },
     componentViewCenter: {
@@ -57,7 +57,7 @@ const styles = {
     }
 }
 
-const VocabularyScreen = () => {
+const VocabularyScreen = ({navigation}) => {
     const [typeList,setTypeList] = useState([]);
     const [image,setImage] = useState("")
 
@@ -88,8 +88,8 @@ const VocabularyScreen = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <View style={styles.default}>
-        <View style={styles.mainView}>
-            <Icon name="arrowleft" size={30}></Icon>
+        <ScrollView style={styles.mainView}>
+            <Icon name="arrowleft" size={30} onPress={() => navigation.goBack()}></Icon>
             <View style={[styles.componentViewCenter,{marginTop:15,minHeight:50}]}>
                 <Typography variant="smallTitle" style={{color:"black"}}>Từ vựng: </Typography>
                 <TextInput numberOfLines={1} style={{width:180,borderColor:"black",borderWidth:1,marginLeft:10,paddingHorizontal:5}}> </TextInput>
@@ -130,7 +130,7 @@ const VocabularyScreen = () => {
                     <Typography variant="text">Thêm</Typography>
                 </Pressable>
             </View>
-        </View>
+        </ScrollView>
     </View>
     </TouchableWithoutFeedback>
   );

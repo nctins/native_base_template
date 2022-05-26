@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Center, StatusBar, VStack, Image } from "native-base";
 import Typography from "../components/Typography";
 
-export const StartScreen = () => {
+const StartScreen = ({navigation}) => {
   return (
     <Center flex={1} bg="primary.1">
       <StatusBar />
@@ -23,10 +23,11 @@ export const StartScreen = () => {
           Ghi lại từ vựng yêu thích của bạn
         </Typography>
         <Button.Group isAttached borderRadius="15" w="80%" h="7%" mt="12%">
-          <Button bgColor="warning.1" w="50%" h="100%">Đăng nhập</Button>
-          <Button bgColor="warning.2" w="50%" h="100%">Đăng ký</Button>
+          <Button bgColor="warning.1" w="50%" h="100%" onPress={() => navigation.navigate('LoginScreen')}>Đăng nhập</Button>
+          <Button bgColor="warning.2" w="50%" h="100%" onPress={() => navigation.navigate('SignUpScreen')}>Đăng ký</Button>
         </Button.Group>
       </VStack>
     </Center>
   );
-};
+}
+export default StartScreen;

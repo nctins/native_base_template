@@ -18,7 +18,7 @@ import {
 import Typography from "../components/Typography";
 import { Input, PasswordInput } from "../components/Input";
 
-export const SignUpScreen = () => {
+const SignUpScreen = ({navigation}) => {
   return (
     <Center flex={1} bg="primary.1">
       <StatusBar />
@@ -53,7 +53,7 @@ export const SignUpScreen = () => {
                 bg={"white"}
               />
               <PasswordInput placeholder="Mật khẩu" />
-              <Button bgColor={"warning.1"} borderRadius="30" shadow={2}>
+              <Button bgColor={"warning.1"} borderRadius="30" shadow={2} onPress={() => navigation.navigate('LoginScreen')}>
                 <Typography variant="buttonText" color="text.light">
                   Đăng ký
                 </Typography>
@@ -64,4 +64,5 @@ export const SignUpScreen = () => {
       </KeyboardAvoidingView>
     </Center>
   );
-};
+}
+export default SignUpScreen;
