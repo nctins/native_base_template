@@ -3,7 +3,7 @@ import axios from "axios";
 import { AuthContext } from "./AuthContext";
 import createAuthRefreshInterceptor from "axios-auth-refresh";
 import * as Keychain from "react-native-keychain";
-import {API_URL} from "@env";
+import { API_URL } from "@env";
 
 const AxiosContext = createContext();
 const { Provider } = AxiosContext;
@@ -12,11 +12,11 @@ const AxiosProvider = ({ children }) => {
   const authContext = useContext(AuthContext);
 
   const authAxios = axios.create({
-    baseURL: API_URL,
+    baseURL: `${API_URL}`,
   });
 
   const publicAxios = axios.create({
-    baseURL: API_URL,
+    baseURL: `${API_URL}`,
   });
 
   authAxios.interceptors.request.use(
@@ -50,13 +50,13 @@ const AxiosProvider = ({ children }) => {
           ...authContext.authState,
           accessToken: tokenRefreshResponse.data.accessToken,
         });
-        await Keychain.setGenericPassword(
-          "token",
-          JSON.stringify({
-            accessToken: tokenRefreshResponse.data.accessToken,
-            refreshToken: authContext.authState.refreshToken,
-          })
-        );
+        // await Keychain.setGenericPassword(
+        //   "token",
+        //   JSON.stringify({
+        //     accessToken: tokenRefreshResponse.data.accessToken,
+        //     refreshToken: authContext.authState.refreshToken,
+        //   })
+        // );
         return Promise.reject();
       })
       .catch((e) => {

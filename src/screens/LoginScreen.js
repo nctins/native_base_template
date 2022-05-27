@@ -1,22 +1,47 @@
-import React from "react";
-import {
-  Center,
-  StatusBar,
-  VStack,
-  Image,
-  HStack,
-  Button,
-} from "native-base";
+import React, { useContext, useState } from "react";
+import { Center, StatusBar, VStack, Image, HStack, Button } from "native-base";
 import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
   Platform,
 } from "react-native";
+import { Alert } from "react-native";
 import Typography from "../components/Typography";
 import { Input, PasswordInput } from "../components/Input";
+import { AuthContext } from "../contexts/AuthContext";
+import { AxiosContext } from "../contexts/AxiosContent";
+import * as Keychain from "react-native-keychain";
 
-const LoginScreen = ({navigation}) => {
+const LoginScreen = ({ navigation }) => {
+  const [user, setUser] = useState("");
+  const [password, setPassword] = useState("");
+  const authContext = useContext(AuthContext);
+  const { publicAxios } = useContext(AxiosContext);
+
+  const onLogin = async () => {
+    publicAxios
+      .post("/login", {
+        user: user,
+        password: password,
+      })
+      .then(async (response) => {
+        // console.log(response.data);
+        const { accessToken, refreshToken } = response.data;
+        authContext.setAuthState({
+          accessToken,
+          refreshToken,
+          authenticated: true,
+        });
+        // await Keychain.setGenericPassword("token", JSON.stringify({ accessToken, refreshToken }));
+        await navigation.navigate("DrawerNavigation");
+      })
+      .catch(async (error) => {
+        console.log(error);
+        Alert.alert("ERROR", JSON.stringify(error?.response?.data?.errors));
+      });
+  };
+
   return (
     <Center flex={1} bg="primary.1">
       <StatusBar />
@@ -44,20 +69,38 @@ const LoginScreen = ({navigation}) => {
                 placeholder="Tài khoản, Email"
                 color={"text.dark"}
                 bg={"white"}
+                value={user}
+                onChangeText={(text) => setUser(text)}
               />
-              <PasswordInput placeholder="Mật khẩu" />
-              <HStack style={{ width: "100%"}}>
-                <Typography variant="smallText" onPress={() => navigation.navigate('SignUpScreen')}>Đăng ký</Typography>
+              <PasswordInput
+                placeholder="Mật khẩu"
+                value={password}
+                onChangeText={(text) => setPassword(text)}
+              />
+              <HStack style={{ width: "100%" }}>
+                <Typography
+                  variant="smallText"
+                  onPress={() => navigation.navigate("SignUpScreen")}
+                >
+                  Đăng ký
+                </Typography>
                 <Typography
                   variant="smallText"
                   color={"text.dark"}
-                  style={{ position: 'absolute', right: 0 }}
+                  style={{ position: "absolute", right: 0 }}
                 >
                   Quên mật khẩu?
                 </Typography>
               </HStack>
-              <Button bgColor={"warning.1"} borderRadius="30" shadow={2} onPress={() => navigation.navigate('DrawerNavigation')}>
-                <Typography variant="buttonText" color="text.light">Đăng nhập</Typography>
+              <Button
+                bgColor={"warning.1"}
+                borderRadius="30"
+                shadow={2}
+                onPress={() => onLogin()}
+              >
+                <Typography variant="buttonText" color="text.light">
+                  Đăng nhập
+                </Typography>
               </Button>
             </VStack>
           </VStack>
@@ -65,5 +108,5 @@ const LoginScreen = ({navigation}) => {
       </KeyboardAvoidingView>
     </Center>
   );
-}
+};
 export default LoginScreen;
