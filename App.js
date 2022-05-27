@@ -1,6 +1,6 @@
 import React from "react";
 import { NativeBaseProvider, extendTheme } from "native-base";
-import { RootComponent } from "./src/screens/index.js";
+import { RootNavigator } from "./src/navigation/RootNavigator.js";
 import { theme as myTheme } from "./src/components/theme.js";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
@@ -20,7 +20,7 @@ export default function App() {
     <NativeBaseProvider theme={theme}>
       <AuthProvider>
         <AxiosProvider>
-          <RootComponent />
+          <RootNavigator />
         </AxiosProvider>
       </AuthProvider>
     </NativeBaseProvider>

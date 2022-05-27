@@ -5,8 +5,8 @@ import { MaterialIcons } from "@expo/vector-icons";
 
 // import HomePage from "./HomePage";
 import StackNavigateHome from "./StackNavigateHome";
-import SettingScreen from "./SettingScreen";
-import FavoriteScreen from "./FavoriteScreen";
+import SettingScreen from "../screens/SettingScreen";
+import FavoriteScreen from "../screens/FavoriteScreen";
 
 const Drawer = createDrawerNavigator();
 

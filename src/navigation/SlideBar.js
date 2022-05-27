@@ -2,8 +2,8 @@ import React from "react";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import IconSetting from 'react-native-vector-icons/MaterialIcons';
-import VocabularyScreen from './VocabularyScreen';
-import SettingScreen from './SettingScreen';
+import VocabularyScreen from '../screens/VocabularyScreen';
+import SettingScreen from '../screens/SettingScreen';
 
 const Drawer = createDrawerNavigator();
 

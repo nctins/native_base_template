@@ -2,16 +2,14 @@ import React from "react";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import StartScreen from "./StartScreen";
-import LoginScreen from "./LoginScreen";
-import SignUpScreen from "./SignUpScreen";
-import HomePage from "./HomePage";
-import SettingScreen from "./SettingScreen";
+import StartScreen from "../screens/StartScreen";
+import LoginScreen from "../screens/LoginScreen";
+import SignUpScreen from "../screens/SignUpScreen";
 import DrawerNavigation from "./Drawer";
 
 const Stack = createNativeStackNavigator();
 
-export const RootComponent = function(){
+export const RootNavigator = function(){
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName="LoginScreen">
