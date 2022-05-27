@@ -1,14 +1,12 @@
 import React from "react";
-import {
-  NativeBaseProvider,
-  extendTheme,
-} from "native-base";
-import { RootComponent }from "./src/screens/index.js";
+import { NativeBaseProvider, extendTheme } from "native-base";
+import { RootComponent } from "./src/screens/index.js";
 import { theme as myTheme } from "./src/components/theme.js";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
-import {font} from "./assets/fonts/index.js"
-import {HomePage} from './src/screens/HomePage.js'
+import { font } from "./assets/fonts/index.js";
+import { AuthProvider } from "./src/contexts/AuthContext.js";
+import { AxiosProvider } from "./src/contexts/AxiosContent.js";
 // extend the theme
 export const theme = extendTheme(myTheme);
 
@@ -20,7 +18,11 @@ export default function App() {
 
   return (
     <NativeBaseProvider theme={theme}>
-      <RootComponent />
+      <AuthProvider>
+        <AxiosProvider>
+          <RootComponent />
+        </AxiosProvider>
+      </AuthProvider>
     </NativeBaseProvider>
   );
 }
