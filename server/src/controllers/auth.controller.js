@@ -95,7 +95,7 @@ AuthController.logout = async (req, res) => {
 };
 
 AuthController.refreshToken = async (req, res) => {
-  const token = req.body.token;
+  const token = req.body.refreshToken;
 
   try {
     const decode = jwt.verify(token, authConfig.RTSecret);

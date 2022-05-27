@@ -56,7 +56,7 @@ authValidator.login = [
 ];
 
 authValidator.refreshToken = [
-  body("token", "Token is required.").notEmpty(),
+  body("refreshToken", "Token is required.").notEmpty(),
   function (req, res, next) {
     try {
       validationResult(req).throw();
