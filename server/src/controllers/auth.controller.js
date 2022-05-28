@@ -53,6 +53,7 @@ AuthController.login = async (req, res) => {
     let payload = {
       username: user.username,
       email: user.email,
+      userId: user._id,
     };
     let options = { expiresIn: authConfig.jwtExpiration };
     let secret = authConfig.secret;
