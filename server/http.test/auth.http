@@ -40,7 +40,7 @@ POST http://localhost:3030/api/v1/refreshToken
 Content-Type: application/json
 
 {
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlTDrW4gTmd1eeG7hW4iLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsImlhdCI6MTY1MzU1OTkzOSwiZXhwIjoxNjU2MTUxOTM5fQ.6Nn6yUJOgKjJBB1Q0NsLRGChj9GAccuZEuy3mk-SVKc"
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlTDrW4gTmd1eeG7hW4iLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInVzZXJJZCI6IjYyOTIwMDEyZTFkYTVhZGYxZDZkOGJiZSIsImlhdCI6MTY1Mzc1MzY5NywiZXhwIjoxNjU2MzQ1Njk3fQ.1WDvbaAQIDih3wANGK_aOBRqkfTa8FkPvm-iCLkf9yo"
 }
 
 ###
@@ -51,4 +51,22 @@ x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlTDrW4gTmd
 ###
 POST http://localhost:3030/api/v1/test
 Content-Type: application/json
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlTDrW4gTmd1eeG7hW4iLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsImlhdCI6MTY1MzU1OTk5NywiZXhwIjoxNjUzNTYzNTk3fQ.T7J2RycaWZXKc7kKSvin3tJ9FaHFOhZt42ypF53_Qlk
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlTDrW4gTmd1eeG7hW4iLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInVzZXJJZCI6IjYyOTIwMDEyZTFkYTVhZGYxZDZkOGJiZSIsImlhdCI6MTY1Mzc1MzY5NywiZXhwIjoxNjUzNzU3Mjk3fQ.WHfJavkHYo2_MS0fuWf_6cbt5HxZJO4rO1jb13NiA5Q
+
+###
+POST http://localhost:3030/api/v1/addTopic
+Content-Type: application/json
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlTDrW4gTmd1eeG7hW4iLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInVzZXJJZCI6IjYyOTIwMDEyZTFkYTVhZGYxZDZkOGJiZSIsImlhdCI6MTY1Mzc1MzY5NywiZXhwIjoxNjUzNzU3Mjk3fQ.WHfJavkHYo2_MS0fuWf_6cbt5HxZJO4rO1jb13NiA5Q
+
+{
+  "title" : "topic1" 
+}
+
+###
+GET http://localhost:3030/api/v1/getAllTopic
+Content-Type: application/json
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlTDrW4gTmd1eeG7hW4iLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInVzZXJJZCI6IjYyOTIwMDEyZTFkYTVhZGYxZDZkOGJiZSIsImlhdCI6MTY1Mzc1MzY5NywiZXhwIjoxNjUzNzU3Mjk3fQ.WHfJavkHYo2_MS0fuWf_6cbt5HxZJO4rO1jb13NiA5Q
+
+{
+  "title" : "topic1" 
+}
