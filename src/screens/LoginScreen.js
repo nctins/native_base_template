@@ -32,7 +32,6 @@ const LoginScreen = ({ navigation }) => {
           refreshToken,
           authenticated: true,
         });
-        // await Keychain.setGenericPassword("token", JSON.stringify({ accessToken, refreshToken }));
         await SecureStore.setItemAsync("token", JSON.stringify({ accessToken, refreshToken }))
         navigation.navigate("DrawerNavigation");
       })

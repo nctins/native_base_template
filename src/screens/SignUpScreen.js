@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import {
   View,
   Center,
@@ -14,11 +14,34 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Platform,
+  Alert,
 } from "react-native";
 import Typography from "../components/Typography";
 import { Input, PasswordInput } from "../components/Input";
+import { AxiosContext } from "../contexts/AxiosContext";
 
-const SignUpScreen = ({navigation}) => {
+const SignUpScreen = ({ navigation }) => {
+  const { publicAxios } = useContext(AxiosContext);
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onSingUp = async () => {
+    publicAxios
+      .post("/register", {
+        email: email,
+        username: username,
+        password: password,
+      })
+      .then((response) => {
+        navigation.navigate("RegisterSuccessScreen");
+      })
+      .catch((error) => {
+        console.log(error);
+        Alert.alert("ERROR", JSON.stringify(error?.response?.data?.errors));
+      });
+  };
+
   return (
     <Center flex={1} bg="primary.1">
       <StatusBar />
@@ -45,15 +68,34 @@ const SignUpScreen = ({navigation}) => {
                 placeholder="Email"
                 color={"text.dark"}
                 bg={"white"}
+                value={email}
+                onChangeText={(text) => {
+                  setEmail(text);
+                }}
               />
               <Input
                 icon="email"
                 placeholder="Tài khoản"
                 color={"text.dark"}
                 bg={"white"}
+                value={username}
+                onChangeText={(text) => {
+                  setUsername(text);
+                }}
               />
-              <PasswordInput placeholder="Mật khẩu" />
-              <Button bgColor={"warning.1"} borderRadius="30" shadow={2} onPress={() => navigation.navigate('LoginScreen')}>
+              <PasswordInput
+                placeholder="Mật khẩu"
+                value={password}
+                onChangeText={(text) => {
+                  setPassword(text);
+                }}
+              />
+              <Button
+                bgColor={"warning.1"}
+                borderRadius="30"
+                shadow={2}
+                onPress={() => onSingUp()}
+              >
                 <Typography variant="buttonText" color="text.light">
                   Đăng ký
                 </Typography>
@@ -64,5 +106,5 @@ const SignUpScreen = ({navigation}) => {
       </KeyboardAvoidingView>
     </Center>
   );
-}
+};
 export default SignUpScreen;

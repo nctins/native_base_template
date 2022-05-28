@@ -18,7 +18,7 @@ import {
 import Typography from "../components/Typography";
 import { Input, PasswordInput } from "../components/Input";
 
-export const RegisterSuccessScreen = () => {
+const RegisterSuccessScreen = ({navigation}) => {
   return (
     <Center flex={1} bg="primary.1">
       <StatusBar />
@@ -41,7 +41,7 @@ export const RegisterSuccessScreen = () => {
             />
             <Typography variant="title">Đăng ký thành công</Typography>
             <VStack w="77%" mt="7%">
-              <Button bgColor={"warning.1"} borderRadius="30" shadow={2}>
+              <Button bgColor={"warning.1"} borderRadius="30" shadow={2} onPress={()=> navigation.navigate("LoginScreen")}>
                 <Typography variant="buttonText" color="text.light">
                   Tiếp tục
                 </Typography>
@@ -53,3 +53,5 @@ export const RegisterSuccessScreen = () => {
     </Center>
   );
 };
+
+export default RegisterSuccessScreen

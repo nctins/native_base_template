@@ -7,6 +7,7 @@ import  * as SecureStore from "expo-secure-store";
 import StartScreen from "../screens/StartScreen";
 import LoginScreen from "../screens/LoginScreen";
 import SignUpScreen from "../screens/SignUpScreen";
+import RegisterSuccessScreen from "../screens/RegisterSuccessScreen";
 import DrawerNavigation from "./Drawer";
 import { AuthContext } from "../contexts/AuthContext";
 
@@ -65,6 +66,11 @@ export const RootNavigator = function () {
         <Stack.Screen
           name="SignUpScreen"
           component={SignUpScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="RegisterSuccessScreen"
+          component={RegisterSuccessScreen}
           options={{ headerShown: false }}
         />
         <Stack.Screen
