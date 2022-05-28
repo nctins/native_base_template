@@ -10,8 +10,8 @@ import { Alert } from "react-native";
 import Typography from "../components/Typography";
 import { Input, PasswordInput } from "../components/Input";
 import { AuthContext } from "../contexts/AuthContext";
-import { AxiosContext } from "../contexts/AxiosContent";
-import * as Keychain from "react-native-keychain";
+import { AxiosContext } from "../contexts/AxiosContext";
+import * as SecureStore from "expo-secure-store";
 
 const LoginScreen = ({ navigation }) => {
   const [user, setUser] = useState("");
@@ -26,7 +26,6 @@ const LoginScreen = ({ navigation }) => {
         password: password,
       })
       .then(async (response) => {
-        // console.log(response.data);
         const { accessToken, refreshToken } = response.data;
         authContext.setAuthState({
           accessToken,
@@ -34,7 +33,8 @@ const LoginScreen = ({ navigation }) => {
           authenticated: true,
         });
         // await Keychain.setGenericPassword("token", JSON.stringify({ accessToken, refreshToken }));
-        await navigation.navigate("DrawerNavigation");
+        await SecureStore.setItemAsync("token", JSON.stringify({ accessToken, refreshToken }))
+        navigation.navigate("DrawerNavigation");
       })
       .catch(async (error) => {
         console.log(error);

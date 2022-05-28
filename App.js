@@ -6,7 +6,7 @@ import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import { font } from "./assets/fonts/index.js";
 import { AuthProvider } from "./src/contexts/AuthContext.js";
-import { AxiosProvider } from "./src/contexts/AxiosContent.js";
+import { AxiosProvider } from "./src/contexts/AxiosContext.js";
 // extend the theme
 export const theme = extendTheme(myTheme);
 
