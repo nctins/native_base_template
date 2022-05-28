@@ -5,6 +5,7 @@ import * as ImagePicker from 'expo-image-picker';
 import IconAwesome from '@expo/vector-icons/FontAwesome';
 import Typography from "../components/Typography";
 import MeansOfVocabulary from "../components/MeansOfVocabulary";
+import uuid from 'react-native-uuid';
 
 const styles = {
     default : {
@@ -58,11 +59,11 @@ const styles = {
 }
 
 const VocabularyScreen = ({navigation}) => {
-    const [typeList,setTypeList] = useState([]);
+    const [meansList,setMeansList] = useState([]);
     const [image,setImage] = useState("")
 
-    const addTypeClick = () => {
-        setTypeList(prev => [...prev,{type:"",means:""}]);;
+    const addMeansClick = () => {
+        setMeansList(prev => [...prev,{id:uuid.v4(),type:"",means:""}]);;
     }
 
     const getNameOfFile = (file) => {
@@ -101,11 +102,11 @@ const VocabularyScreen = ({navigation}) => {
                         name="pluscircle" 
                         size={30} 
                         style={{marginRight:10}}
-                        onPress={addTypeClick}
+                        onPress={addMeansClick}
                         ></Icon>
                 </View>
                 <View style={{width:"100%", paddingHorizontal:20,paddingBottom:10, zIndex:1}}>
-                    {typeList.map((e,index) => <MeansOfVocabulary key={index} typeList = {typeList} setTypeList = {setTypeList} id = {index}/>)}
+                    {meansList.map((means,index) => <MeansOfVocabulary key={index} meansList={meansList} setMeansList = {setMeansList} id={means.id}/>)}
                 </View>
             </View>
             <View style={[styles.componentViewLeft,{marginTop:15}]}>
