@@ -18,6 +18,7 @@ APIRouter.post('/refreshToken',authValidator.refreshToken, AuthController.refres
 //topic controller
 APIRouter.get('/getAllTopic', authJWT.verifyToken, TopicController.getAll);
 APIRouter.post('/addTopic', authJWT.verifyToken, topicValidator.addTopic, TopicController.addTopic);
+APIRouter.delete('/topic/:topicId', authJWT.verifyToken, topicValidator.removeTopic, TopicController.deleteTopic)
 
 // vocab controller
 APIRouter.get('/topic/:topicId/getVocab', authJWT.verifyToken, VocabController.getVocab);

@@ -1,4 +1,4 @@
-import { body, validationResult } from "express-validator";
+import { body, param, validationResult } from "express-validator";
 import TopicModel from "../models/Topic.model";
 import mongoose from "mongoose";
 
@@ -19,12 +19,35 @@ topicValidator.addTopic = [
             value: req.body.title,
             msg: "Topic đã tồn tại.",
             param: "title",
-            location: "body"
+            location: "body",
           },
         };
       } else {
         next();
       }
+    } catch (error) {
+      res.status(400).json({
+        success: false,
+        ...error,
+      });
+    }
+  },
+];
+
+topicValidator.removeTopic = [
+  param("topicId")
+    .notEmpty()
+    .withMessage("Thiếu topicId.")
+    .custom(async (topicId)=>{
+      const existTopic = await TopicModel.findById(topicId);
+      if (!existTopic) {
+        return Promise.reject("Topic không tồn tại");
+      }
+    }),
+  async function (req, res, next) {
+    try {
+      validationResult(req).throw();
+      next();
     } catch (error) {
       res.status(400).json({
         success: false,

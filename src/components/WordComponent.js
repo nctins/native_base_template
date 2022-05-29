@@ -42,7 +42,7 @@ const WordComponent = ({word,setListTopic,topicId,navigation}) => {
             <Stack p="4" space={3}>
                 <HStack space={3} justifyContent="space-between">
                     <Heading size="md" color="black">
-                        {word.name}
+                        {word.title}
                     </Heading>
                     {
                         word.isFavorite ? <AntDesign name="heart" size={24} color={"red"} onPress={onPressFavoriteIcon} />
@@ -50,7 +50,7 @@ const WordComponent = ({word,setListTopic,topicId,navigation}) => {
                     }
                 </HStack>
                 <HStack space={3} justifyContent="space-between">
-                    <Text fontWeight="400" color="black">{word.description}</Text>
+                    <Text fontWeight="400" color="black">{word.note}</Text>
                     <Image 
                         source={{
                             uri: "https://wallpaperaccess.com/full/317501.jpg"

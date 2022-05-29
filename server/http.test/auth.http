@@ -56,17 +56,27 @@ x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlTDrW4gTmd
 ###
 POST http://localhost:3030/api/v1/addTopic
 Content-Type: application/json
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlTDrW4gTmd1eeG7hW4iLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInVzZXJJZCI6IjYyOTIwMDEyZTFkYTVhZGYxZDZkOGJiZSIsImlhdCI6MTY1Mzc1MzY5NywiZXhwIjoxNjUzNzU3Mjk3fQ.WHfJavkHYo2_MS0fuWf_6cbt5HxZJO4rO1jb13NiA5Q
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlTDrW4gTmd1eeG7hW4iLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInVzZXJJZCI6IjYyOTIwMDEyZTFkYTVhZGYxZDZkOGJiZSIsImlhdCI6MTY1MzgxMDQwMywiZXhwIjoxNjUzODE0MDAzfQ.epwSCQt7lzG4eXkpAINBa6ZMfTeVRZ_sBddQKQVno8A
+
+{
+  "title" : "topic1fdsfds" 
+}
+
+###
+GET http://localhost:3030/api/v1/getAllTopic
+Content-Type: application/json
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlTDrW4gTmd1eeG7hW4iLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInVzZXJJZCI6IjYyOTIwMDEyZTFkYTVhZGYxZDZkOGJiZSIsImlhdCI6MTY1MzgxMDQwMywiZXhwIjoxNjUzODE0MDAzfQ.epwSCQt7lzG4eXkpAINBa6ZMfTeVRZ_sBddQKQVno8A
 
 {
   "title" : "topic1" 
 }
 
 ###
-GET http://localhost:3030/api/v1/getAllTopic
+DELETE http://localhost:3030/api/v1/topic/62933416ba8c6cf7cb13641e
 Content-Type: application/json
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlTDrW4gTmd1eeG7hW4iLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInVzZXJJZCI6IjYyOTIwMDEyZTFkYTVhZGYxZDZkOGJiZSIsImlhdCI6MTY1Mzc1MzY5NywiZXhwIjoxNjUzNzU3Mjk3fQ.WHfJavkHYo2_MS0fuWf_6cbt5HxZJO4rO1jb13NiA5Q
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlTDrW4gTmd1eeG7hW4iLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInVzZXJJZCI6IjYyOTIwMDEyZTFkYTVhZGYxZDZkOGJiZSIsImlhdCI6MTY1MzgyMTE4OSwiZXhwIjoxNjUzODI0Nzg5fQ.T6jrekUZIqgo_PHWYDEwhpqYDv_XidjOMC1NBDnohE0
 
-{
-  "title" : "topic1" 
-}
+###
+GET http://localhost:3030/api/v1/topic/62933416ba8c6cf7cb13641e/getVocab
+Content-Type: application/json
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlTDrW4gTmd1eeG7hW4iLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInVzZXJJZCI6IjYyOTIwMDEyZTFkYTVhZGYxZDZkOGJiZSIsImlhdCI6MTY1MzgyMTE4OSwiZXhwIjoxNjUzODI0Nzg5fQ.T6jrekUZIqgo_PHWYDEwhpqYDv_XidjOMC1NBDnohE0

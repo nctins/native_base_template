@@ -1,6 +1,15 @@
 import mongoose from "mongoose";
 import TopicModel from "../models/Topic.model";
 
+const catchError = (err, res) => {
+  console.log(err);
+  return res.status(500).json({
+    success: false,
+    message: "Server error. Please try again.",
+    error: err,
+  });
+};
+
 const TopicController = {};
 
 TopicController.getAll = async (req, res) => {
@@ -15,12 +24,7 @@ TopicController.getAll = async (req, res) => {
       data: { topics: topics },
     });
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({
-      success: false,
-      message: "Server error. Please try again.",
-      error: error,
-    });
+    return catchError(error, res);
   }
 };
 
@@ -36,15 +40,26 @@ TopicController.addTopic = async (req, res) => {
       return res.status(200).json({
         success: true,
         message: "Tạo chủ đề thành công.",
+        topic: { _id: newTopic._id, title: newTopic.title },
       });
     })
     .catch((error) => {
-      console.log(error);
-      return res.status(500).json({
-        success: false,
-        message: "Server error. Please try again.",
-        error: error,
-      });
+      return catchError(error, res);
+    });
+};
+
+TopicController.deleteTopic = (req, res) => {
+  return TopicModel.findByIdAndRemove(
+    mongoose.Types.ObjectId(req.params.topicId)
+  )
+    .then(()=>{
+      return res.status(200).json({
+        success: true,
+        message: "Xóa chủ đề thành công."
+      })
+    })
+    .catch((error) => {
+      return catchError(error, res);
     });
 };
 

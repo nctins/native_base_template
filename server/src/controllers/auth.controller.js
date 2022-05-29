@@ -102,8 +102,8 @@ AuthController.refreshToken = async (req, res) => {
     const decode = jwt.verify(token, authConfig.RTSecret);
     const user = await UsersModel.findOne({ email: decode.email });
     if (token === user.refreshToken) {
-      const accessToken = await jwt.sign(
-        { username: decode.username, email: decode.email },
+      const accessToken = jwt.sign(
+        { username: decode.username, email: decode.email, userId: decode.userId },
         authConfig.secret,
         { expiresIn: authConfig.jwtExpiration }
       );
