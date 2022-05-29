@@ -39,11 +39,12 @@ const AxiosProvider = ({ children }) => {
     const options = {
       method: "POST",
       data,
-      url: API_URL + "\refreshToken",
+      url: `${API_URL}` + "/refreshToken",
     };
 
     return axios(options)
       .then(async (tokenRefreshResponse) => {
+        console.log("token is expired, refreshing token...")
         failedRequest.response.config.headers["x-access-token"] =
           tokenRefreshResponse.data.accessToken;
         authContext.setAuthState({
@@ -57,9 +58,11 @@ const AxiosProvider = ({ children }) => {
             refreshToken: authContext.authState.refreshToken,
           })
         );
-        return Promise.reject();
+        return Promise.resolve();
       })
       .catch((e) => {
+        console.log("error in refresh token")
+        console.log(e)
         authContext.setAuthState({
           accessToken: null,
           refreshToken: null,
