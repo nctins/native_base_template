@@ -22,7 +22,7 @@ import {
 } from "native-base";
 import { AxiosContext } from "../contexts/AxiosContext";
 
-const WordComponent = ({ word, setListTopic, topicId, navigation }) => {
+const WordComponent = ({ word, navigation }) => {
   const { authAxios } = useContext(AxiosContext);
   const [isFavorite, setIsFavorite] = useState(word.favorite);
 

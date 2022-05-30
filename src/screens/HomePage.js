@@ -190,8 +190,6 @@ const HomePage = ({ navigation, route }) => {
           <WordComponent
             key={idx}
             word={vocab}
-            setListTopic={setListTopic}
-            topicId={topicId}
             navigation={navigation}
           />
         );

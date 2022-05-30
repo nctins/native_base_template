@@ -105,7 +105,7 @@ VocabController.favorites = async (req, res) => {
       .sort("title");
     return res.status(200).json({
       success: true,
-      data: { favorites: favorites },
+      favorites: favorites,
     });
   } catch (error) {
     return catchError(error, res);

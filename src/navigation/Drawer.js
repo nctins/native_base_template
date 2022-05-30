@@ -27,7 +27,6 @@ const DrawerNavigation = function(){
             <Drawer.Screen name="HomePage" component={StackNavigateHome} options={{title:"Trang chủ",drawerIcon: () => <MaterialIcons name="home" size={24} />,headerShown: false}}/>
             <Drawer.Screen name="FavoriteScreen" component={FavoriteScreen} options={{title:"Yêu thích",drawerIcon: () => <MaterialIcons name="favorite-outline" size={24} />}}/>
             <Drawer.Screen name="SettingScreen" component={SettingScreen} options={{title:"Cài đặt",drawerIcon: () => <MaterialIcons name="settings" size={24} />}}/>
-            {/* <Drawer.Screen name="startScreen" component={StartScreen} options={{title:"Đăng xuất",drawerIcon: () => <MaterialIcons name="logout" size={24} />}} onPress={()=>{console.log("logout")}}/> */}
         </Drawer.Navigator>
     )
 }
