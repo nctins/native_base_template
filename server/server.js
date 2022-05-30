@@ -16,6 +16,7 @@ mongoose
   .connect(process.env.DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    dbName: "vocano",
   })
   .then(() => {
     console.log("Database connected");
