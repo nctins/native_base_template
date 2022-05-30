@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   View,
   StatusBar,
@@ -40,7 +40,7 @@ const FavoriteScreen = ({ navigation }) => {
   const getFavorites = () => {
     const { authAxios } = useContext(AxiosContext);
     authAxios
-      .get("/vocab/favorites")
+      .get("/favorites")
       .then((res) => {
         setListWord(res.data.favorites);
       })
@@ -69,6 +69,8 @@ const FavoriteScreen = ({ navigation }) => {
   };
 
   // use effect
+
+//   useEffect(()=>{getFavorites();},[])
 
   const headerRight = () => {
     return (

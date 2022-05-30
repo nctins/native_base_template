@@ -72,7 +72,9 @@ const AddVocabScreen = ({ route, navigation }) => {
   const [image, setImage] = useState("");
   const [title, setTitle] = useState("");
   const [note, setNote] = useState("");
-  const { topicId } = route.params;
+  const { topicId, getVocab } = route.params;
+  // console.log("hello topicId is:")
+  // console.log(topicId);
   const { authAxios } = useContext(AxiosContext);
 
   const addTypeClick = () => {
@@ -95,6 +97,7 @@ const AddVocabScreen = ({ route, navigation }) => {
           {
             text: "OK",
             onPress: () => {
+              getVocab(topicId);
               navigation.goBack();
             },
           },

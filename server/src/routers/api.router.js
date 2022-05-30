@@ -25,7 +25,7 @@ APIRouter.get('/topic/:topicId/getVocab', authJWT.verifyToken, VocabController.g
 APIRouter.get('/vocab/:vocabId', authJWT.verifyToken, VocabController.getVocabById);
 APIRouter.post('/topic/:topicId/addVocab', authJWT.verifyToken, VocabController.addVocab);
 APIRouter.put('/vocab/:vocabId/changeFavorite', authJWT.verifyToken, VocabController.changeFavorite);
-APIRouter.get('/vocab/favorites', authJWT.verifyToken, VocabController.favorites);
+APIRouter.get('/favorites', authJWT.verifyToken, VocabController.favorites);
 
 
 // test api

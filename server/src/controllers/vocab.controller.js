@@ -9,7 +9,7 @@ const catchError = (err, res) => {
   return res.status(500).json({
     success: false,
     message: "Server error. Please try again.",
-    error: error,
+    error: err,
   });
 };
 
@@ -97,12 +97,14 @@ VocabController.changeFavorite = async (req, res) => {
 
 VocabController.favorites = async (req, res) => {
   try {
-    const favorites = VocabModel.find({
+    console.log(req.JWTDecode.userId)
+    const favorites = await VocabModel.find({
       userId: mongoose.Types.ObjectId(req.JWTDecode.userId),
       favorite: true,
     })
       .select("-userId -__v")
       .sort("title");
+    // console.log(favorites);
     return res.status(200).json({
       success: true,
       favorites: favorites,

@@ -77,6 +77,7 @@ const HomePage = ({ navigation, route }) => {
   const onPressAddVocabularyButton = () => {
     navigation.navigate("AddVocabScreen", {
       topicId: topicId,
+      getVocab:  getVocab,
     });
   };
 

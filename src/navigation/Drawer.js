@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { MaterialIcons } from "@expo/vector-icons";
@@ -9,8 +9,12 @@ import StackNavigateHome from "./StackNavigateHome";
 import SettingScreen from "../screens/SettingScreen";
 import FavoriteScreen from "../screens/FavoriteScreen";
 import StartScreen from "../screens/StartScreen";
+import { AuthContext } from "../contexts/AuthContext";
 
 const Drawer = createDrawerNavigator();
+// const logout = ()=>{
+//     const {logout} = useContext(AuthContext);
+// }
 
 // const DrawerNavigation = function(){
 //     return (
