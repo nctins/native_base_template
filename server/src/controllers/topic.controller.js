@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import TopicModel from "../models/Topic.model";
+import VocabModel from "../models/Vocab.model";
 
 const catchError = (err, res) => {
   console.log(err);
@@ -17,7 +18,7 @@ TopicController.getAll = async (req, res) => {
     const topics = await TopicModel.find({
       userId: mongoose.Types.ObjectId(req.JWTDecode.userId),
     })
-      .select("title _id")
+      .select("title _id size")
       .sort("title");
     return res.status(200).json({
       success: true,
@@ -34,6 +35,7 @@ TopicController.addTopic = async (req, res) => {
   const Topic = new TopicModel({
     title: title,
     userId: mongoose.Types.ObjectId(userId),
+    size: 0,
   });
   return Topic.save()
     .then((newTopic) => {
@@ -49,14 +51,28 @@ TopicController.addTopic = async (req, res) => {
 };
 
 TopicController.deleteTopic = (req, res) => {
+  const topicId = req.params.topicId;
   return TopicModel.findByIdAndRemove(
-    mongoose.Types.ObjectId(req.params.topicId)
+    mongoose.Types.ObjectId(topicId)
   )
-    .then(()=>{
-      return res.status(200).json({
-        success: true,
-        message: "Xóa chủ đề thành công."
+    .then(() => {
+      // console.log(topicId)
+      // return res.status(200).json({
+      //   success: true,
+      //   message: "Xóa chủ đề thành công.",
+      // });
+      return VocabModel.deleteMany({
+        topicId: mongoose.Types.ObjectId(topicId),
       })
+        .then(() => {
+          return res.status(200).json({
+            success: true,
+            message: "Xóa chủ đề thành công.",
+          });
+        })
+        .catch((err) => {
+          return catchError(err, res);
+        });
     })
     .catch((error) => {
       return catchError(error, res);

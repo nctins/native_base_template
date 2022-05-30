@@ -9,6 +9,7 @@ import {
   Box,
   FormControl,
   Modal,
+  Center,
 } from "native-base";
 import { MaterialIcons, Entypo } from "@expo/vector-icons";
 import {
@@ -22,13 +23,31 @@ import {
 import Typography from "../components/Typography";
 import { SearchbarInput, Input } from "../components/Input";
 import TopicComponent from "../components/TopicComponent";
+import WordComponent from "../components/WordComponent";
 import { AxiosContext } from "../contexts/AxiosContext";
 
-const HomePage = ({ navigation }) => {
+const HomePage = ({ navigation, route }) => {
+  const styles = {
+    TopicTitle: {
+      paddingHorizontal: 10,
+      paddingVertical: 2,
+    },
+    ActiveTopic: {
+      paddingHorizontal: 10,
+      paddingVertical: 2,
+      backgroundColor: "#E9B52F",
+      borderRadius: 10,
+    },
+  };
+
+  // State
   const { authAxios } = useContext(AxiosContext);
   const [listTopic, setListTopic] = useState([]);
-  const [indexTopic, setIndexTopic] = useState(null);
+  const [listWord, setListWord] = useState([]);
+  const [topicId, setTopicId] = useState("");
+  const [vocabMod, setVocabMod] = useState(false);
 
+  // Callback
   const getAllTopic = () => {
     authAxios
       .get("/getAllTopic")
@@ -42,21 +61,23 @@ const HomePage = ({ navigation }) => {
       });
   };
 
-  useEffect(() => {
-    getAllTopic();
-  }, []);
+  const getVocab = (topicId) => {
+    const uri = "/topic/" + topicId + "/getVocab";
+    authAxios
+      .get(uri)
+      .then((res) => {
+        setListWord(res.data.data.vocab);
+      })
+      .catch((err) => {
+        console.log(err);
+        Alert.alert("ERROR", err.message);
+      });
+  };
 
-  const styles = {
-    TopicTitle: {
-      paddingHorizontal: 10,
-      paddingVertical: 2,
-    },
-    ActiveTopic: {
-      paddingHorizontal: 10,
-      paddingVertical: 2,
-      backgroundColor: "#E9B52F",
-      borderRadius: 10,
-    },
+  const onPressAddVocabularyButton = () => {
+    navigation.navigate("AddVocabScreen", {
+      topicId: topicId,
+    });
   };
 
   const configHeaderRight = () => {
@@ -82,7 +103,25 @@ const HomePage = ({ navigation }) => {
     );
   };
 
-  React.useLayoutEffect(() => {
+  const onPressTopicTitle = async (id) => {
+    setTopicId(id);
+    getVocab(id);
+    setVocabMod(true);
+  };
+
+  const onPressViewAll = () => {
+    setTopicId(null);
+    getAllTopic();
+    setVocabMod(false);
+  };
+
+  // react effect
+
+  useEffect(() => {
+    getAllTopic();
+  }, []);
+
+  useLayoutEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
         <Entypo
@@ -104,20 +143,123 @@ const HomePage = ({ navigation }) => {
     });
   }, [navigation]);
 
-  const onPressTopicTitle = (id) => {
-    navigation.navigate("VocabScreen", {
-      topicId: id,
-    });
-  };
+  // Sub component
 
   const TopicLabel = (topic, idx) => {
     return (
-      <View key={idx} style={styles.TopicTitle}>
+      <View
+        key={idx}
+        style={
+          vocabMod && topicId === topic._id
+            ? styles.ActiveTopic
+            : styles.TopicTitle
+        }
+      >
         <Typography key={idx} onPress={() => onPressTopicTitle(topic._id)}>
           {topic.title}
         </Typography>
       </View>
     );
+  };
+
+  const TopicContent = () => {
+    if (listTopic.length > 0) {
+      return listTopic.map((topic, index) => (
+        <TopicComponent
+          key={index}
+          topic={topic}
+          getAllTopic={getAllTopic}
+          onPressTopicTitle={onPressTopicTitle}
+        />
+      ));
+    } else {
+      return (
+        <Center pt={"30%"}>
+          <Typography variant="smallText" color="#000">
+            Bạn chưa có chủ đề nào.
+          </Typography>
+        </Center>
+      );
+    }
+  };
+
+  const VocabContent = () => {
+    if (listWord.length > 0) {
+      return listWord.map((vocab, idx) => {
+        return (
+          <WordComponent
+            key={idx}
+            word={vocab}
+            setListTopic={setListTopic}
+            topicId={topicId}
+            navigation={navigation}
+          />
+        );
+      });
+    } else {
+      return (
+        <Center pt={"30%"}>
+          <Typography variant="smallText" color="#000">
+            Bạn chưa có từ nào trong chủ đề này
+          </Typography>
+        </Center>
+      );
+    }
+  };
+
+  const ToolBar = () => {
+    if (vocabMod) {
+      return (
+        <View
+          style={{
+            width: "100%",
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <Button
+            variant="ghost"
+            _text={{
+              color: "#E9B52F",
+              fontSize: "xl",
+              fontWeight: "bold",
+            }}
+            onPress={onPressAddVocabularyButton}
+            leftIcon={
+              <Icon
+                as={MaterialIcons}
+                name="add-circle"
+                size="lg"
+                color={"warning.1"}
+              />
+            }
+          >
+            Thêm Từ vựng
+          </Button>
+          <Button
+            variant="ghost"
+            _text={{
+              color: "#E9B52F",
+              fontSize: "xl",
+              fontWeight: "bold",
+            }}
+            onPress={() => navigation.navigate("Practice")}
+            leftIcon={
+              <Icon
+                as={MaterialIcons}
+                name="add-circle"
+                size="lg"
+                color={"warning.1"}
+              />
+            }
+          >
+            Luyện tập
+          </Button>
+        </View>
+      );
+    } else {
+      return <AddTopic setListTopic={setListTopic} getAllTopic={getAllTopic} />;
+    }
   };
 
   return (
@@ -140,8 +282,14 @@ const HomePage = ({ navigation }) => {
             </VStack>
             <HStack space={3} style={{ marginLeft: 15 }}>
               <ScrollView horizontal={true}>
-                <View style={styles.ActiveTopic}>
-                  <Typography>Tất cả</Typography>
+                <View style={vocabMod ? styles.TopicTitle : styles.ActiveTopic}>
+                  <Typography
+                    onPress={() => {
+                      onPressViewAll();
+                    }}
+                  >
+                    Tất cả
+                  </Typography>
                 </View>
                 {listTopic.map(TopicLabel)}
               </ScrollView>
@@ -153,18 +301,11 @@ const HomePage = ({ navigation }) => {
               style={{ width: "100%" }}
               bgColor={"primary.2"}
             >
-              <AddTopic setListTopic={setListTopic} getAllTopic={getAllTopic} />
+              <ToolBar />
               <Box width="100%" height="80%" alignItems={"center"}>
                 <View pb={4} width="90%" showsVerticalScrollIndicator={false}>
                   <ScrollView height="90%">
-                    {listTopic.map((topic, index) => (
-                      <TopicComponent
-                        key={index}
-                        topic={topic}
-                        getAllTopic={getAllTopic}
-                        onPressTopicTitle={onPressTopicTitle}
-                      />
-                    ))}
+                    {vocabMod ? <VocabContent /> : <TopicContent />}
                   </ScrollView>
                 </View>
               </Box>
@@ -177,6 +318,7 @@ const HomePage = ({ navigation }) => {
 };
 export default HomePage;
 
+//modal
 const AddTopic = ({ setListTopic, getAllTopic }) => {
   const { authAxios } = useContext(AxiosContext);
 

@@ -91,12 +91,11 @@ const AddVocabScreen = ({ route, navigation }) => {
     authAxios
       .post(uri, data)
       .then((res) => {
-          console.log(res)
-        Alert.alert("SUCCESS", res.message, [
+        Alert.alert("SUCCESS", res.data.message, [
           {
             text: "OK",
             onPress: () => {
-              navigation.navigate("VocabScreen", { topicId: topicId });
+              navigation.goBack();
             },
           },
         ]);

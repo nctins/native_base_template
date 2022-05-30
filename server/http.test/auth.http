@@ -72,9 +72,9 @@ x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlTDrW4gTmd
 }
 
 ###
-DELETE http://localhost:3030/api/v1/topic/62933416ba8c6cf7cb13641e
+DELETE http://localhost:3030/api/v1/topic/629494da9acf808bfc870b82
 Content-Type: application/json
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlTDrW4gTmd1eeG7hW4iLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInVzZXJJZCI6IjYyOTIwMDEyZTFkYTVhZGYxZDZkOGJiZSIsImlhdCI6MTY1MzgyMTE4OSwiZXhwIjoxNjUzODI0Nzg5fQ.T6jrekUZIqgo_PHWYDEwhpqYDv_XidjOMC1NBDnohE0
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5jdGlucyIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwidXNlcklkIjoiNjI5MjAwMTJlMWRhNWFkZjFkNmQ4YmJlIiwiaWF0IjoxNjUzOTA0Njc1LCJleHAiOjE2NTM5MDgyNzV9.DFAXDZsT2nlQo8x8_AoKZ0JR9TfYcjzwE3txiXmQI6g
 
 ###
 GET http://localhost:3030/api/v1/topic/62933416ba8c6cf7cb13641e/getVocab

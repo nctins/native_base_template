@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import TopicModel from "../models/Topic.model";
 import VocabModel from "../models/Vocab.model";
 
 const VocabController = {};
@@ -20,7 +21,6 @@ VocabController.getVocab = async (req, res) => {
     })
       .select("-userId -__v")
       .sort("title");
-    console.log(vocab)
     return res.status(200).json({
       success: true,
       data: { vocab: vocab },
@@ -59,10 +59,19 @@ VocabController.addVocab = async (req, res) => {
     return vocab
       .save()
       .then((newVocab) => {
-        return res.status(200).json({
-          success: true,
-          message: "Tạo từ vựng thành công.",
-        });
+        return TopicModel.findByIdAndUpdate(
+          mongoose.Types.ObjectId(req.params.topicId),
+          { $inc: { size: 1 } }
+        )
+          .then(() => {
+            return res.status(200).json({
+              success: true,
+              message: "Tạo từ vựng thành công.",
+            });
+          })
+          .catch((err) => {
+            return catchError(err, res);
+          });
       })
       .catch((err) => {
         return catchError(err, res);
