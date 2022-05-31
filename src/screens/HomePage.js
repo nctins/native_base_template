@@ -242,11 +242,13 @@ const HomePage = ({ navigation, route }) => {
               fontSize: "xl",
               fontWeight: "bold",
             }}
-            onPress={() => navigation.navigate("Practice")}
+            onPress={() => navigation.navigate("Practice",{
+              listWord:listWord,
+            })}
             leftIcon={
               <Icon
                 as={MaterialIcons}
-                name="add-circle"
+                name="assignment"
                 size="lg"
                 color={"warning.1"}
               />
