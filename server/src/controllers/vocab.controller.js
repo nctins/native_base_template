@@ -138,4 +138,26 @@ VocabController.updateVocab = (req, res) => {
     });
 };
 
+VocabController.removeVocab = async (req, res) => {
+  const vocab = await VocabModel.findById(
+    mongoose.Types.ObjectId(req.params.vocabId)
+  );
+  const topicId = vocab.topicId;
+  return VocabModel.findByIdAndRemove(
+    mongoose.Types.ObjectId(req.params.vocabId)
+  )
+    .then(async () => {
+      await TopicModel.findByIdAndUpdate(mongoose.Types.ObjectId(topicId), {
+        $inc: { size: -1 },
+      }).exec();
+      return res.status(200).json({
+        success: true,
+        message: "Xóa từ vựng thành công.",
+      });
+    })
+    .catch((err) => {
+      return catchError(err, res);
+    });
+};
+
 export default VocabController;

@@ -121,6 +121,9 @@ const HomePage = ({ navigation, route }) => {
   // react effect
 
   useEffect(() => {
+    if(vocabMod){
+      getVocab(topicId);
+    }
     getAllTopic();
   }, [isFocused]);
 
