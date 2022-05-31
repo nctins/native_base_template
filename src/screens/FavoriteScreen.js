@@ -13,6 +13,7 @@ import {
   Center,
 } from "native-base";
 import { MaterialIcons, Entypo } from "@expo/vector-icons";
+import { useIsFocused } from "@react-navigation/native";
 import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
@@ -36,6 +37,7 @@ const FavoriteScreen = ({ navigation }) => {
   // State
   const [listWord, setListWord] = useState([]);
   const { authAxios } = useContext(AxiosContext);
+  const isFocused = useIsFocused();
 
   //callback
   const getFavorites = () => {
@@ -79,7 +81,7 @@ const FavoriteScreen = ({ navigation }) => {
 
   useEffect(() => {
     getFavorites();
-  }, []);
+  }, [isFocused]);
 
   const headerRight = () => {
     return (

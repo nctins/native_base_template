@@ -12,6 +12,7 @@ import {
   Center,
 } from "native-base";
 import { MaterialIcons, Entypo } from "@expo/vector-icons";
+import { useIsFocused } from "@react-navigation/native";
 import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
@@ -46,6 +47,7 @@ const HomePage = ({ navigation, route }) => {
   const [listWord, setListWord] = useState([]);
   const [topicId, setTopicId] = useState("");
   const [vocabMod, setVocabMod] = useState(false);
+  const isFocused = useIsFocused();
 
   // Callback
   const getAllTopic = () => {
@@ -120,7 +122,7 @@ const HomePage = ({ navigation, route }) => {
 
   useEffect(() => {
     getAllTopic();
-  }, []);
+  }, [isFocused]);
 
   useLayoutEffect(() => {
     navigation.setOptions({
