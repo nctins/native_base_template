@@ -9,7 +9,7 @@ const catchError = (err, res) => {
   return res.status(500).json({
     success: false,
     message: "Server error. Please try again.",
-    error: error,
+    error: err,
   });
 };
 
@@ -53,7 +53,7 @@ VocabController.addVocab = async (req, res) => {
       note: req.body.note,
       topicId: mongoose.Types.ObjectId(req.params.topicId),
       userId: mongoose.Types.ObjectId(req.JWTDecode.userId),
-      favorites: false,
+      favorite: false,
     });
 
     return vocab
@@ -82,37 +82,32 @@ VocabController.addVocab = async (req, res) => {
 };
 
 VocabController.changeFavorite = async (req, res) => {
-  return VocabModel.findById(
-    mongoose.Types.ObjectId(req.params.vocabId),
-    (err, vocab) => {
-      if (err) {
-        return catchError(err, res);
-      }
-      vocab.favorite = !vocab.favorite;
-      vocab.save((err, updateVocab) => {
-        if (err) {
-          return catchError(err, res);
-        }
-        return res.status(200).json({
-          success: true,
-          message: "Thay đổi trạng thái thành công.",
-        });
-      });
-    }
-  );
+  const vocab = await VocabModel.findById(mongoose.Types.ObjectId(req.params.vocabId));
+  const newFavor = !vocab.favorite;
+  return VocabModel.updateOne({_id: vocab._id},{favorite: newFavor}).then(()=>{
+    return res.status(200).json({
+      success: true,
+      message: "Thay đổi trạng thái thành công.",
+      newStatus: newFavor,
+    });
+  }).catch((e)=>{
+    return catchError(e, res)
+  })
 };
 
 VocabController.favorites = async (req, res) => {
   try {
-    const favorites = VocabModel.find({
+    console.log(req.JWTDecode.userId)
+    const favorites = await VocabModel.find({
       userId: mongoose.Types.ObjectId(req.JWTDecode.userId),
       favorite: true,
     })
       .select("-userId -__v")
       .sort("title");
+    // console.log(favorites);
     return res.status(200).json({
       success: true,
-      data: { favorites: favorites },
+      favorites: favorites,
     });
   } catch (error) {
     return catchError(error, res);

@@ -77,6 +77,7 @@ const HomePage = ({ navigation, route }) => {
   const onPressAddVocabularyButton = () => {
     navigation.navigate("AddVocabScreen", {
       topicId: topicId,
+      getVocab:  getVocab,
     });
   };
 
@@ -190,8 +191,6 @@ const HomePage = ({ navigation, route }) => {
           <WordComponent
             key={idx}
             word={vocab}
-            setListTopic={setListTopic}
-            topicId={topicId}
             navigation={navigation}
           />
         );
