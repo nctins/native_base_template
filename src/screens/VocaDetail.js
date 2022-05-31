@@ -21,8 +21,29 @@ import Typography from "../components/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const VocaDetail = ({navigation}) => {
+const VocaDetail = ({navigation, route}) => {
+  // state
   const [liked, setLiked] = useState(false);
+  const { word } = route.params;
+
+  // effect
+
+  // sub component
+  const WordMean = ()=>{
+    const mean = word.mean ? JSON.parse(word.mean) : [] ;
+    if(mean.length > 0){
+      return mean.map((ele, idx)=>{
+        return <Typography variant="vocalTextV" color="text.dark">{"(" +  ele.type + ") " + ele.means}</Typography>
+      })
+    }
+  }
+  
+  const onEdit = ()=>{
+    navigation.navigate("EditVocabScreen",{
+      word: word
+    })
+  }
+
   return (
     <View style={{flex: 1}} bg="primary.2">
       <View style={{flex: 0.5, flexDirection: 'row'}}>
@@ -84,7 +105,7 @@ const VocaDetail = ({navigation}) => {
               paddingLeft="5"
               justifyContent="center"
             >
-              <Typography variant="vocalTextE" color="text.dark">Table (n)</Typography>
+              <Typography variant="vocalTextE" color="text.dark">{word.title}</Typography>
             </VStack>
           </View>
 
@@ -115,7 +136,7 @@ const VocaDetail = ({navigation}) => {
                 paddingLeft="5"
                 justifyContent="center"
               >
-                <Typography variant="vocalTextV" color="text.dark">Cái bàn</Typography>
+                <WordMean/>
               </VStack>
             </View>
           </View>
@@ -133,8 +154,8 @@ const VocaDetail = ({navigation}) => {
           space={4}
           alignItems="center"
         >
-          <Typography variant="vocalTextV" color="text.dark" padding="2">
-            Một bề mặt phẳng, thường được hỗ trợ bởi bốn chân, được sử dụng để đặt các vật
+          <Typography variant="vocalTextV" color="text.dark" padding="2" alignItems="flex-start">
+            {word.note}
           </Typography>
         </VStack>
       </View>
@@ -149,7 +170,7 @@ const VocaDetail = ({navigation}) => {
           justifyContent="center"
         >
           <Button.Group borderRadius="10" w="50%" h="50%">
-            <Button bgColor="edit" w="50%" h="100%">Chỉnh sửa</Button>
+            <Button bgColor="edit" w="50%" h="100%" onPress={()=>{onEdit();}}>Chỉnh sửa</Button>
             <Button bgColor="danger" w="50%" h="100%">Xóa</Button>
           </Button.Group> 
         </VStack>

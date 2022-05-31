@@ -33,13 +33,19 @@ const WordComponent = ({ word, navigation, callback }) => {
       .then((res) => {
         word.favorite = res.data.newStatus;
         setIsFavorite(word.favorite);
-        if(callback){
+        if (callback) {
           callback();
         }
       })
       .catch(() => {
         Alert.alert("ERROR", "Thay đổi trạng thái không thành công.");
       });
+  };
+
+  const onPressWord = () => {
+    navigation.navigate("Detail", {
+      word: word,
+    });
   };
 
   return (
@@ -55,7 +61,11 @@ const WordComponent = ({ word, navigation, callback }) => {
       }}
       backgroundColor="white"
     >
-      <Pressable onPress={() => navigation.navigate("Detail")}>
+      <Pressable
+        onPress={() => {
+          onPressWord();
+        }}
+      >
         <Stack p="4" space={3}>
           <HStack space={3} justifyContent="space-between">
             <Heading size="md" color="black">

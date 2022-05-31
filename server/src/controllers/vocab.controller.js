@@ -82,17 +82,21 @@ VocabController.addVocab = async (req, res) => {
 };
 
 VocabController.changeFavorite = async (req, res) => {
-  const vocab = await VocabModel.findById(mongoose.Types.ObjectId(req.params.vocabId));
+  const vocab = await VocabModel.findById(
+    mongoose.Types.ObjectId(req.params.vocabId)
+  );
   const newFavor = !vocab.favorite;
-  return VocabModel.updateOne({_id: vocab._id},{favorite: newFavor}).then(()=>{
-    return res.status(200).json({
-      success: true,
-      message: "Thay đổi trạng thái thành công.",
-      newStatus: newFavor,
+  return VocabModel.updateOne({ _id: vocab._id }, { favorite: newFavor })
+    .then(() => {
+      return res.status(200).json({
+        success: true,
+        message: "Thay đổi trạng thái thành công.",
+        newStatus: newFavor,
+      });
+    })
+    .catch((e) => {
+      return catchError(e, res);
     });
-  }).catch((e)=>{
-    return catchError(e, res)
-  })
 };
 
 VocabController.favorites = async (req, res) => {
@@ -110,6 +114,28 @@ VocabController.favorites = async (req, res) => {
   } catch (error) {
     return catchError(error, res);
   }
+};
+
+VocabController.updateVocab = (req, res) => {
+  const data = {
+    title: req.body.title,
+    mean: req.body.mean,
+    image: "",
+    note: req.body.note,
+  };
+  return VocabModel.findByIdAndUpdate(
+    mongoose.Types.ObjectId(req.params.vocabId),
+    data
+  )
+    .then(() => {
+      return res.status(200).json({
+        success: true,
+        message: "Cập nhật từ vựng thành công",
+      });
+    })
+    .catch((err) => {
+      return catchError(err, res);
+    });
 };
 
 export default VocabController;
