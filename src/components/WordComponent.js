@@ -22,7 +22,7 @@ import {
 } from "native-base";
 import { AxiosContext } from "../contexts/AxiosContext";
 
-const WordComponent = ({ word, navigation }) => {
+const WordComponent = ({ word, navigation, callback }) => {
   const { authAxios } = useContext(AxiosContext);
   const [isFavorite, setIsFavorite] = useState(word.favorite);
 
@@ -33,6 +33,9 @@ const WordComponent = ({ word, navigation }) => {
       .then((res) => {
         word.favorite = res.data.newStatus;
         setIsFavorite(word.favorite);
+        if(callback){
+          callback();
+        }
       })
       .catch(() => {
         Alert.alert("ERROR", "Thay đổi trạng thái không thành công.");

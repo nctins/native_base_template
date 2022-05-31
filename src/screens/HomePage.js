@@ -192,6 +192,7 @@ const HomePage = ({ navigation, route }) => {
             key={idx}
             word={vocab}
             navigation={navigation}
+            callback={null}
           />
         );
       });

@@ -35,10 +35,10 @@ const FavoriteScreen = ({ navigation }) => {
 
   // State
   const [listWord, setListWord] = useState([]);
+  const { authAxios } = useContext(AxiosContext);
 
   //callback
   const getFavorites = () => {
-    const { authAxios } = useContext(AxiosContext);
     authAxios
       .get("/favorites")
       .then((res) => {
@@ -55,7 +55,14 @@ const FavoriteScreen = ({ navigation }) => {
   const VocabContent = () => {
     if (listWord.length > 0) {
       return listWord.map((vocab, idx) => {
-        return <WordComponent key={idx} word={vocab} navigation={navigation} />;
+        return (
+          <WordComponent
+            key={idx}
+            word={vocab}
+            navigation={navigation}
+            callback={getFavorites}
+          />
+        );
       });
     } else {
       return (
@@ -70,7 +77,9 @@ const FavoriteScreen = ({ navigation }) => {
 
   // use effect
 
-//   useEffect(()=>{getFavorites();},[])
+  useEffect(() => {
+    getFavorites();
+  }, []);
 
   const headerRight = () => {
     return (

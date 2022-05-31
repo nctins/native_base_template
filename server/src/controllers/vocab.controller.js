@@ -97,14 +97,12 @@ VocabController.changeFavorite = async (req, res) => {
 
 VocabController.favorites = async (req, res) => {
   try {
-    console.log(req.JWTDecode.userId)
     const favorites = await VocabModel.find({
       userId: mongoose.Types.ObjectId(req.JWTDecode.userId),
       favorite: true,
     })
       .select("-userId -__v")
       .sort("title");
-    // console.log(favorites);
     return res.status(200).json({
       success: true,
       favorites: favorites,
