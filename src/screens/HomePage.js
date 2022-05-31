@@ -47,6 +47,9 @@ const HomePage = ({ navigation, route }) => {
   const [listWord, setListWord] = useState([]);
   const [topicId, setTopicId] = useState("");
   const [vocabMod, setVocabMod] = useState(false);
+  const [keySearch, setKeySearch] = useState("");
+  const [searchMod, setSearchMod] = useState(false);
+  const [searchResult, setSearchResult] = useState([]);
   const isFocused = useIsFocused();
 
   // Callback
@@ -79,7 +82,7 @@ const HomePage = ({ navigation, route }) => {
   const onPressAddVocabularyButton = () => {
     navigation.navigate("AddVocabScreen", {
       topicId: topicId,
-      getVocab:  getVocab,
+      getVocab: getVocab,
     });
   };
 
@@ -118,14 +121,40 @@ const HomePage = ({ navigation, route }) => {
     setVocabMod(false);
   };
 
+  const onSearch = () => {
+    if (keySearch) {
+      setSearchMod(true);
+      setSearchResult([]);
+      const data = { params: { keySearch: keySearch } };
+      if (vocabMod) {
+        const uri = "/topic/" + topicId + "/search";
+        authAxios.get(uri, data).then((res) => {
+          setSearchResult(res.data.data);
+        });
+      } else {
+        const uri = "/search";
+        authAxios.get(uri, data).then((res) => {
+          setSearchResult(res.data.data);
+        });
+      }
+    } else {
+      setSearchMod(false);
+    }
+  };
+
   // react effect
 
   useEffect(() => {
-    if(vocabMod){
+    if (vocabMod) {
       getVocab(topicId);
     }
     getAllTopic();
+    onSearch();
   }, [isFocused]);
+
+  useEffect(()=>{
+    onSearch();
+  },[vocabMod])
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -161,7 +190,12 @@ const HomePage = ({ navigation, route }) => {
             : styles.TopicTitle
         }
       >
-        <Typography key={idx} onPress={() => onPressTopicTitle(topic._id)}>
+        <Typography
+          key={idx}
+          onPress={() => {
+            onPressTopicTitle(topic._id);
+          }}
+        >
           {topic.title}
         </Typography>
       </View>
@@ -206,6 +240,40 @@ const HomePage = ({ navigation, route }) => {
         <Center pt={"30%"}>
           <Typography variant="smallText" color="#000">
             Bạn chưa có từ nào trong chủ đề này
+          </Typography>
+        </Center>
+      );
+    }
+  };
+
+  const SearchContent = () => {
+    if (searchResult.length > 0) {
+      if (vocabMod) {
+        return searchResult.map((vocab, idx) => {
+          return (
+            <WordComponent
+              key={idx}
+              word={vocab}
+              navigation={navigation}
+              callback={null}
+            />
+          );
+        });
+      } else {
+        return searchResult.map((topic, index) => (
+          <TopicComponent
+            key={index}
+            topic={topic}
+            getAllTopic={getAllTopic}
+            onPressTopicTitle={onPressTopicTitle}
+          />
+        ));
+      }
+    } else {
+      return (
+        <Center pt={"30%"}>
+          <Typography variant="smallText" color="#000">
+            Không có kết quả nào phù hợp.
           </Typography>
         </Center>
       );
@@ -282,6 +350,13 @@ const HomePage = ({ navigation, route }) => {
                   icon="search"
                   placeholder="Tìm kiếm..."
                   color="text.light"
+                  onChangeText={(text) => {
+                    setKeySearch(text);
+                  }}
+                  value={keySearch}
+                  onEndEditing={() => {
+                    onSearch();
+                  }}
                 />
               </VStack>
             </VStack>
@@ -291,6 +366,9 @@ const HomePage = ({ navigation, route }) => {
                   <Typography
                     onPress={() => {
                       onPressViewAll();
+                      if (searchMod) {
+                        onSearch();
+                      }
                     }}
                   >
                     Tất cả
@@ -310,7 +388,13 @@ const HomePage = ({ navigation, route }) => {
               <Box width="100%" height="80%" alignItems={"center"}>
                 <View pb={4} width="90%" showsVerticalScrollIndicator={false}>
                   <ScrollView height="90%">
-                    {vocabMod ? <VocabContent /> : <TopicContent />}
+                    {searchMod ? (
+                      <SearchContent />
+                    ) : vocabMod ? (
+                      <VocabContent />
+                    ) : (
+                      <TopicContent />
+                    )}
                   </ScrollView>
                 </View>
               </Box>

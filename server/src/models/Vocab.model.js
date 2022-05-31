@@ -31,4 +31,6 @@ const VocabSchema = new mongoose.Schema({
   },
 });
 
+VocabSchema.index({title:'text', note:'text'})
+
 export default mongoose.model("Vocab", VocabSchema);

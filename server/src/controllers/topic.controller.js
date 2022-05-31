@@ -52,9 +52,7 @@ TopicController.addTopic = async (req, res) => {
 
 TopicController.deleteTopic = (req, res) => {
   const topicId = req.params.topicId;
-  return TopicModel.findByIdAndRemove(
-    mongoose.Types.ObjectId(topicId)
-  )
+  return TopicModel.findByIdAndRemove(mongoose.Types.ObjectId(topicId))
     .then(() => {
       // console.log(topicId)
       // return res.status(200).json({
@@ -77,6 +75,21 @@ TopicController.deleteTopic = (req, res) => {
     .catch((error) => {
       return catchError(error, res);
     });
+};
+
+TopicController.topicSearch = async (req, res) => {
+  try {
+    const topics = await TopicModel.find({
+      userId: mongoose.Types.ObjectId(req.JWTDecode.userId),
+      title: new RegExp(".*" + req.query.keySearch + ".*", "i"),
+    });
+    return res.status(200).json({
+      success: true,
+      data: topics,
+    });
+  } catch (error) {
+    return catchError(error, res);
+  }
 };
 
 export default TopicController;

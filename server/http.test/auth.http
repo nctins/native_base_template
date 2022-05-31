@@ -79,7 +79,7 @@ x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5jdGlucyI
 ###
 GET http://localhost:3030/api/v1/topic/62957b774b608e4d73bc7628/getVocab
 Content-Type: application/json
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFCQyIsImVtYWlsIjoiQUJDQGdtYWlsLmNvbSIsInVzZXJJZCI6IjYyOTRmNTM0ZmM5NTRmMjBjMTIyZjBmYiIsImlhdCI6MTY1Mzk2ODI5OCwiZXhwIjoxNjUzOTcxODk4fQ.dWBlRbqENtg-SigLf_MiBlepjahk2V4qnlbML9y4czw
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFCQyIsImVtYWlsIjoiQUJDQGdtYWlsLmNvbSIsInVzZXJJZCI6IjYyOTRmNTM0ZmM5NTRmMjBjMTIyZjBmYiIsImlhdCI6MTY1Mzk5NTU5MCwiZXhwIjoxNjUzOTk5MTkwfQ.3ZLiZ67x2w_Ky5JLMEAFfLxbFnA4zr0bTBeZTYuibC4
 
 ###
 PUT http://localhost:3030/api/v1/vocab/6294c676e165867b2d8f49dc/changeFavorite
@@ -90,3 +90,12 @@ x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5jdGlucyI
 GET  http://localhost:3030/api/v1/favorites
 Content-Type: application/json
 x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5jdGlucyIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwidXNlcklkIjoiNjI5MjAwMTJlMWRhNWFkZjFkNmQ4YmJlIiwiaWF0IjoxNjUzOTIyNTcwLCJleHAiOjE2NTM5MjYxNzB9.VprorOiUFl5uHjeGOqfOiLQBCI10F5zklVnTBZ09Rrs
+
+###
+GET  http://localhost:3030/api/v1/search
+Content-Type: application/json
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFCQyIsImVtYWlsIjoiQUJDQGdtYWlsLmNvbSIsInVzZXJJZCI6IjYyOTRmNTM0ZmM5NTRmMjBjMTIyZjBmYiIsImlhdCI6MTY1Mzk5NTU5MCwiZXhwIjoxNjUzOTk5MTkwfQ.3ZLiZ67x2w_Ky5JLMEAFfLxbFnA4zr0bTBeZTYuibC4
+
+{
+  "keySearch": "topi"
+}

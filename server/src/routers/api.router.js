@@ -18,10 +18,12 @@ APIRouter.post('/refreshToken',authValidator.refreshToken, AuthController.refres
 //topic controller
 APIRouter.get('/getAllTopic', authJWT.verifyToken, TopicController.getAll);
 APIRouter.post('/addTopic', authJWT.verifyToken, topicValidator.addTopic, TopicController.addTopic);
+APIRouter.get('/search',authJWT.verifyToken, TopicController.topicSearch)
 APIRouter.delete('/topic/:topicId', authJWT.verifyToken, topicValidator.removeTopic, TopicController.deleteTopic)
 
 // vocab controller
 APIRouter.get('/topic/:topicId/getVocab', authJWT.verifyToken, VocabController.getVocab);
+APIRouter.get('/topic/:topicId/search', authJWT.verifyToken, VocabController.vocabSearch);
 APIRouter.get('/vocab/:vocabId', authJWT.verifyToken, VocabController.getVocabById);
 APIRouter.post('/topic/:topicId/addVocab', authJWT.verifyToken, VocabController.addVocab);
 APIRouter.put('/vocab/:vocabId/updateVocab', authJWT.verifyToken, VocabController.updateVocab);

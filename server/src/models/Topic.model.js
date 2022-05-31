@@ -14,9 +14,11 @@ const TopicSchema = mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
   },
-  size:{
+  size: {
     type: Number,
   },
 });
+
+TopicSchema.index({ title: 'text' });
 
 export default mongoose.model("Topic", TopicSchema);

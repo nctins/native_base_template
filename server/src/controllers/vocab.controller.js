@@ -15,6 +15,7 @@ const catchError = (err, res) => {
 
 VocabController.getVocab = async (req, res) => {
   try {
+    // console.log(req)
     const vocab = await VocabModel.find({
       topicId: mongoose.Types.ObjectId(req.params.topicId),
       userId: mongoose.Types.ObjectId(req.JWTDecode.userId),
@@ -158,6 +159,23 @@ VocabController.removeVocab = async (req, res) => {
     .catch((err) => {
       return catchError(err, res);
     });
+};
+
+VocabController.vocabSearch = async (req, res) => {
+  try {
+    const vocabs = await VocabModel.find({
+      topicId: mongoose.Types.ObjectId(req.params.topicId),
+    }).or([
+      { title: new RegExp(".*" + req.query.keySearch + ".*", "i") },
+      { note: new RegExp(".*" + req.query.keySearch + ".*", "i") },
+    ]);
+    return res.status(200).json({
+      success: true,
+      data: vocabs,
+    });
+  } catch (error) {
+    return catchError(error, res);
+  }
 };
 
 export default VocabController;
