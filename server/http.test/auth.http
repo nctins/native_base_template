@@ -36,6 +36,15 @@ Content-Type: application/json
 }
 
 ###
+POST https://vocano.herokuapp.com/api/v1/login
+Content-Type: application/json
+
+{
+  "user": "ABC",
+  "password": "123"
+}
+
+###
 POST http://localhost:3030/api/v1/refreshToken
 Content-Type: application/json
 
