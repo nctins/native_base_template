@@ -1,7 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
-import APIRouter from "./src/routers/api.router.js";
+import APIRouter from "./routers/api.router.js";
 
 require("dotenv").config();
 
