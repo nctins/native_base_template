@@ -13,7 +13,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import { AxiosContext } from "../contexts/AxiosContext";
 import * as SecureStore from "expo-secure-store";
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = ({ navigation,route }) => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const authContext = useContext(AuthContext);
@@ -32,7 +32,9 @@ const LoginScreen = ({ navigation }) => {
           refreshToken,
           authenticated: true,
         });
-        await SecureStore.setItemAsync("token", JSON.stringify({ accessToken, refreshToken }))
+        await SecureStore.setItemAsync("token", JSON.stringify({ accessToken, refreshToken }));
+        setUser("");
+        setPassword("")
         navigation.navigate("DrawerNavigation");
       })
       .catch(async (error) => {
@@ -75,6 +77,7 @@ const LoginScreen = ({ navigation }) => {
                 placeholder="Mật khẩu"
                 value={password}
                 onChangeText={(text) => setPassword(text)}
+                style={{color:"black"}}
               />
               <HStack style={{ width: "100%" }}>
                 <Typography
