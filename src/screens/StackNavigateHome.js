@@ -1,8 +1,5 @@
 import React from "react";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { MaterialIcons } from "@expo/vector-icons";
-
-
 import HomePage from "./HomePage";
 import VocabularyScreen from "./VocabularyScreen";
 import VocaDetail from "./VocaDetail";

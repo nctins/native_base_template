@@ -6,6 +6,7 @@ import TopicController from '../controllers/topic.controller';
 import VocabController from '../controllers/vocab.controller';
 import { json } from 'body-parser';
 import topicValidator from '../middleware/topicValidator';
+import UserController from '../controllers/user.controller';
 
 const APIRouter = express.Router();
 
@@ -31,6 +32,8 @@ APIRouter.put('/vocab/:vocabId/changeFavorite', authJWT.verifyToken, VocabContro
 APIRouter.delete('/vocab/:vocabId/removeVocab', authJWT.verifyToken, VocabController.removeVocab)
 APIRouter.get('/favorites', authJWT.verifyToken, VocabController.favorites);
 
+// user controller
+APIRouter.get('/user/getUser', authJWT.verifyToken, UserController.getUser);
 
 // test api
 APIRouter.post('/test', authJWT.verifyToken, (req,res)=>{

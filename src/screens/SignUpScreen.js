@@ -1,12 +1,9 @@
 import React, { useContext, useState } from "react";
 import {
-  View,
   Center,
   StatusBar,
-  Text,
   VStack,
   Image,
-  HStack,
   Button,
 } from "native-base";
 import {

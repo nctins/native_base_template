@@ -13,7 +13,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import { AxiosContext } from "../contexts/AxiosContext";
 import * as SecureStore from "expo-secure-store";
 
-const LoginScreen = ({ navigation,route }) => {
+const LoginScreen = ({ navigation }) => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const authContext = useContext(AuthContext);

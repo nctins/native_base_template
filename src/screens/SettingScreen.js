@@ -1,12 +1,15 @@
-import React, {useState} from 'react';
-import {View,ScrollView, TextInput,Image, Switch ,TouchableWithoutFeedback,Keyboard,KeyboardAvoidingView } from 'react-native';
+import React, {useState, useEffect, useContext} from 'react';
+import {View,ScrollView, TextInput,Image, Switch ,TouchableWithoutFeedback,Keyboard } from 'react-native';
 import IconSetting from 'react-native-vector-icons/MaterialIcons';
 import IconMenu from 'react-native-vector-icons/Entypo';
 import Typography from "../components/Typography";
+import { AxiosContext } from "../contexts/AxiosContext";
 
 const SettingScreen = ({navigation}) => {
     const [isAlertEnabled,setIsAlertEnabled] = useState(true);
     const toggleSwitch = () => setIsAlertEnabled(previousState => !previousState);
+    const { authAxios } = useContext(AxiosContext);
+    const [userInfo,setUserInfo] = useState(null);
 
     const styles = {
         mainView: {
@@ -41,6 +44,24 @@ const SettingScreen = ({navigation}) => {
             color: "black"
         }
     }
+
+    const getUser = () => {
+        authAxios
+            .get("/user/getUser")
+            .then((res) => {
+                const user = res.data.data.user;
+                console.log(user);
+                setUserInfo(user);
+            })
+            .catch((err) => {
+            console.log(err);
+            Alert.alert("ERROR", err.message);
+            });
+    };
+
+    useEffect(() => {
+        getUser();
+    },[])
 
     const headerRight = () => {
         return (
@@ -80,10 +101,15 @@ const SettingScreen = ({navigation}) => {
                 <View style={{height:160, paddingTop:15}}>
                     <Typography variant="smallTitle" style={{color:"black",marginLeft:15}}>Tài khoản</Typography>
                     <View style={[styles.componentMainView,{minHeight:60, paddingHorizontal:15,alignItems:"center",flexDirection:"row"}]}>
-                        <Image style={styles.tinyLogo} source={{url:"https://reactnative.dev/img/tiny_logo.png"}}></Image>
+                        <Image 
+                            style={styles.tinyLogo} 
+                            source={{uri:"https://www.seekpng.com/png/detail/514-5147412_default-avatar-icon.png"}}
+                            alt="default logo"
+                        />
+
                         <View style={{marginLeft:15}}>
-                            <Typography variant="smallTitle" style={{color:"black"}}>Minh Nguyễn</Typography>
-                            <Typography variant="email" style={{color:"black"}}>minh@gmail.com</Typography>
+                            <Typography variant="smallTitle" style={{color:"black"}}>{userInfo ? userInfo.username : null}</Typography>
+                            <Typography variant="email" style={{color:"black"}}>{userInfo ? userInfo.email : null}</Typography>
                         </View>
                     </View>
                 </View>

@@ -27,7 +27,7 @@ import TopicComponent from "../components/TopicComponent";
 import WordComponent from "../components/WordComponent";
 import { AxiosContext } from "../contexts/AxiosContext";
 
-const HomePage = ({ navigation, route }) => {
+const HomePage = ({ navigation }) => {
   const styles = {
     TopicTitle: {
       paddingHorizontal: 10,

@@ -3,13 +3,7 @@ import {
   View,
   StatusBar,
   VStack,
-  Icon,
-  HStack,
-  Button,
-  IconButton,
   Box,
-  FormControl,
-  Modal,
   Center,
 } from "native-base";
 import { MaterialIcons, Entypo } from "@expo/vector-icons";
@@ -22,7 +16,7 @@ import {
   ScrollView,
 } from "react-native";
 import Typography from "../components/Typography";
-import { SearchbarInput, Input } from "../components/Input";
+import { SearchbarInput } from "../components/Input";
 import WordComponent from "../components/WordComponent";
 import { AxiosContext } from "../contexts/AxiosContext";
 

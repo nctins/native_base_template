@@ -1,24 +1,14 @@
 import React, { useState, useContext } from "react";
-import { Alert, View } from "react-native";
-import { Fontisto, AntDesign } from "@expo/vector-icons";
+import { Alert } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 import {
-  Center,
-  StatusBar,
   Text,
   Pressable,
-  VStack,
   Image,
-  Icon,
   HStack,
-  Button,
-  IconButton,
   Box,
-  ScrollView,
-  FormControl,
-  Modal,
   Stack,
   Heading,
-  FlatList,
 } from "native-base";
 import { AxiosContext } from "../contexts/AxiosContext";
 

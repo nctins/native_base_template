@@ -1,20 +1,11 @@
 import React, { useState, useContext } from "react";
 import {
   View,
-  Center,
-  StatusBar,
-  Text,
   VStack,
   Image,
-  HStack,
   Button,
-  IconButton,
 } from "native-base";
 import {
-  KeyboardAvoidingView,
-  TouchableWithoutFeedback,
-  Keyboard,
-  Platform,
   Pressable,
   Alert,
 } from "react-native";
@@ -28,8 +19,6 @@ const VocaDetail = ({ navigation, route }) => {
   const [liked, setLiked] = useState(false);
   const { authAxios } = useContext(AxiosContext);
   const { word } = route.params;
-
-  // effect
 
   // sub component
   const WordMean = () => {

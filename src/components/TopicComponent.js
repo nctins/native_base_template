@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { View, Alert } from "react-native";
+import React, { useContext } from "react";
+import { Alert } from "react-native";
 import { Fontisto, Feather } from "@expo/vector-icons";
 import {
   Text,

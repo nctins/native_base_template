@@ -10,7 +10,7 @@ import {
     StyleSheet, 
 } from "react-native";
 import Typography from "../components/Typography";
-import { MaterialIcons,FontAwesome } from "@expo/vector-icons";
+import {FontAwesome } from "@expo/vector-icons";
 
 const Test = ({navigation,route}) => {
     const { listWord } = route.params;

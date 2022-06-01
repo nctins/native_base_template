@@ -1,12 +1,9 @@
 import React from "react";
 import {
-  View,
   Center,
   StatusBar,
-  Text,
   VStack,
   Image,
-  HStack,
   Button,
 } from "native-base";
 import {
@@ -16,7 +13,6 @@ import {
   Platform,
 } from "react-native";
 import Typography from "../components/Typography";
-import { Input, PasswordInput } from "../components/Input";
 
 const RegisterSuccessScreen = ({navigation}) => {
   return (
